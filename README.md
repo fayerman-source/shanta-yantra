@@ -126,6 +126,7 @@ The current implementation is deliberately narrow:
 4. `docs/INTERACTION_MODEL.md`
 5. `docs/ROADMAP.md`
 6. `docs/THESIS.md`
+7. `docs/WHY_NOT_JUST_A_PROMPT.md`
 
 ## License
 
