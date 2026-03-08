@@ -50,3 +50,21 @@ def test_mirror_for_decision_tradeoff_language():
     assert response.type == "mirror"
     assert "decision_question" in observation.signals
     assert "tradeoff" in observation.signals
+
+
+def test_mirror_for_displacement_into_machine_use():
+    observation, response = build_response(
+        "Instead of doing my morning walk, I opened the laptop and started vibe-coding."
+    )
+    assert response.type == "mirror"
+    assert "displacement" in observation.signals
+    assert "attention_capture" in observation.signals
+
+
+def test_mirror_for_ai_drift_pattern():
+    observation, response = build_response(
+        "I opened the computer to solve one thing and ended up in three hours of AI drift."
+    )
+    assert response.type == "mirror"
+    assert "displacement" in observation.signals
+    assert "attention_capture" in observation.signals

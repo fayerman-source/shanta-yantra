@@ -90,6 +90,27 @@ TRADEOFF_MARKERS = (
     "constraint",
     "constraints",
 )
+DISPLACEMENT_MARKERS = (
+    "instead of",
+    "meant to",
+    "ended up",
+    "got pulled into",
+    "lost the morning",
+    "opened another tab",
+    "one more thing",
+    "felt easier so i stayed",
+    "started vibe-coding",
+    "ai drift",
+)
+ATTENTION_CAPTURE_MARKERS = (
+    "screen",
+    "tab",
+    "computer",
+    "laptop",
+    "vibe-coding",
+    "ai drift",
+    "prompting models",
+)
 SAFETY_MARKERS = (
     "kill myself",
     "end my life",
@@ -119,6 +140,8 @@ def observe_text(text: str) -> ObservationResult:
     hedges = _contains_any(normalized, HEDGE_MARKERS)
     decision_questions = _contains_any(normalized, DECISION_QUESTION_MARKERS)
     tradeoffs = _contains_any(normalized, TRADEOFF_MARKERS)
+    displacement = _contains_any(normalized, DISPLACEMENT_MARKERS)
+    attention_capture = _contains_any(normalized, ATTENTION_CAPTURE_MARKERS)
     safety = _contains_any(normalized, SAFETY_MARKERS)
 
     signals: list[str] = []
@@ -140,6 +163,10 @@ def observe_text(text: str) -> ObservationResult:
         signals.append("decision_question")
     if tradeoffs:
         signals.append("tradeoff")
+    if displacement:
+        signals.append("displacement")
+    if attention_capture:
+        signals.append("attention_capture")
 
     likely_tensions: list[str] = []
     if contradictions:
@@ -152,6 +179,10 @@ def observe_text(text: str) -> ObservationResult:
         likely_tensions.append("tentative commitment")
     if decision_questions and tradeoffs:
         likely_tensions.append("possible value colliding with practical cost")
+    if displacement:
+        likely_tensions.append("intended action displaced by an easier pull")
+    if displacement and attention_capture:
+        likely_tensions.append("attention captured by the machine")
 
     likely_conditioning: list[str] = []
     if conditioning:
@@ -168,6 +199,10 @@ def observe_text(text: str) -> ObservationResult:
         likely_resistance.append("repetitive mental looping")
     if hedges:
         likely_resistance.append("indecision or soft holding back")
+    if displacement:
+        likely_resistance.append("lower-friction substitution")
+    if attention_capture:
+        likely_resistance.append("attention capture or re-entry")
 
     raw_score = (
         len(contradictions)
@@ -179,6 +214,8 @@ def observe_text(text: str) -> ObservationResult:
         + len(hedges)
         + len(decision_questions)
         + len(tradeoffs)
+        + len(displacement)
+        + len(attention_capture)
     )
     confidence = min(1.0, raw_score / 6.0)
 

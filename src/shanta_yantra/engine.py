@@ -15,6 +15,8 @@ def _question_text(observation: ObservationResult) -> str:
         return "What matters more here: the possible value, or the cost and constraint around it?"
     if "decision_question" in observation.signals:
         return "What makes this a live question rather than a decision you already trust?"
+    if "displacement" in observation.signals and "attention_capture" in observation.signals:
+        return "What made the machine easier to enter than the thing you meant to do?"
     if "hedge" in observation.signals:
         return "What keeps this at 'maybe' instead of a clearer yes or no?"
     if "resistance" in observation.signals:
@@ -66,6 +68,34 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         )
         return observation, response
 
+    if "displacement" in observation.signals:
+        if "attention_capture" in observation.signals:
+            response = ResponseEnvelope(
+                type="mirror",
+                text=(
+                    "This reads like intended action being displaced by easier machine absorption. "
+                    "Name the thing you meant to do, name what the screen gave you instead, and "
+                    "stop there before turning the substitution into a justification."
+                ),
+                rationale="Displacement plus attention-capture language gives enough signal for a direct mirror.",
+                signals=observation.signals,
+                confidence=max(observation.confidence, 0.65),
+            )
+            return observation, response
+
+        response = ResponseEnvelope(
+            type="mirror",
+            text=(
+                "This reads like the intended action got replaced by something easier to enter. "
+                "Separate the original intention from the substitute, and notice the handoff before "
+                "arguing with it."
+            ),
+            rationale="Displacement language points to substitution rather than low signal.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.55),
+        )
+        return observation, response
+
     if "conditioning" in observation.signals and "resistance" in observation.signals:
         conditioning = _join_bits(observation.likely_conditioning, "pressure-based language")
         resistance = _join_bits(observation.likely_resistance, "hesitation")
@@ -99,6 +129,7 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         "contradiction" in observation.signals
         or "decision_question" in observation.signals
         or "hedge" in observation.signals
+        or "attention_capture" in observation.signals
     ) and observation.confidence < 0.8:
         question_target = _join_bits(observation.likely_tensions, "two competing directions")
         response = ResponseEnvelope(

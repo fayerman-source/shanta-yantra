@@ -12,11 +12,14 @@ Most AI systems are optimized to prolong attention. Shanta Yantra is designed to
 
 Its purpose is to help users notice what is happening more clearly, reduce unnecessary mediation, and return to offline practice sooner.
 
+It is also being shaped as an attention-protection tool: something that can notice drift, substitution, and screen capture without turning those patterns into more machine time.
+
 ## What Shanta Yantra Is
 
 - A mirror for patterns in expression
 - A support for clearer self-observation
 - A framework for short, restrained interactions
+- A guard against attention capture and lower-friction substitution
 - A system that should reduce dependence on itself over time
 
 ## What Shanta Yantra Is Not
@@ -43,6 +46,9 @@ Its purpose is to help users notice what is happening more clearly, reduce unnec
 
 5. **Restraint before ambition**
    The system should speak less as the work deepens, not more.
+
+6. **Protect concentration**
+   A valid feature should help users notice drift, interruption, and substitution before those patterns harden into dependence.
 
 ## Architecture Summary
 
@@ -89,6 +95,7 @@ Current contents:
 - roadmap for a standalone v1.0 core
 - deterministic Python CLI for bounded reflective output
 - local JSON session logging and test coverage
+- early heuristics for decision-making, tradeoffs, and attention/substitution patterns
 
 ## Install
 
