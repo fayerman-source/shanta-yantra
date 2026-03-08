@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a docs-first public skeleton for Adhara. The root contains the core project documents, and `docs/` holds the stable design references.
+This repository is a docs-first public skeleton for Shanta Yantra. The root contains the core project documents, and `docs/` holds the stable design references.
 
 - `README.md`: public overview and positioning.
 - `GOVERNANCE.md`: decision framework and feature boundaries.

@@ -1,6 +1,6 @@
-# Adhara Governance
+# Shanta Yantra Governance
 
-Adhara should be evaluated by what it prevents as much as by what it enables. This document is the decision framework for keeping the project restrained, useful, and non-deceptive.
+Shanta Yantra should be evaluated by what it prevents as much as by what it enables. This document is the decision framework for keeping the project restrained, useful, and non-deceptive.
 
 ## Use This Before Shipping Any Feature
 

@@ -1,6 +1,6 @@
 # Architecture
 
-Adhara is designed as a restrained system for observation and return-to-practice. The architecture becomes quieter as the project matures.
+Shanta Yantra is designed as a restrained system for observation and return-to-practice. The architecture becomes quieter as the project matures.
 
 ## Phase 1: v1.0 - Outer Clarification
 
@@ -95,7 +95,7 @@ User reflection or signal input
 
 ## Stable Constraints
 
-- The system is a mirror, not an authority.
+- Shanta Yantra is a mirror, not an authority.
 - The system may organize outer material; it may not claim inner certainty.
 - The system should become less necessary over time.
 - Every phase should preserve a path back to offline practice.
