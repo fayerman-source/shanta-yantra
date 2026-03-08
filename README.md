@@ -6,6 +6,12 @@ Shanta Yantra is a contemplative support system designed to help people observe 
 
 The project is intentionally narrow. It treats AI as a tool for outer observation and clarification, not as a guide, authority, or source of insight by itself.
 
+## Why This Exists
+
+Most AI systems are optimized to prolong attention. Shanta Yantra is designed to do the opposite.
+
+Its purpose is to help users notice what is happening more clearly, reduce unnecessary mediation, and return to offline practice sooner.
+
 ## What Shanta Yantra Is
 
 - A mirror for patterns in expression
@@ -49,6 +55,15 @@ Shanta Yantra is organized into three phases:
 - **v3.0: Contemplative Restraint**
   Minimal prompting, deliberate silence, and stronger return-to-practice behavior.
 
+## Design Standard
+
+Every feature should make the system:
+
+- more honest about what it can observe
+- less likely to create dependence
+- more willing to stop
+- easier to leave behind when direct practice is available
+
 ## Repository Structure
 
 ```text
@@ -66,6 +81,12 @@ shanta-yantra/
 ## Current Status
 
 This repository is documentation-first. It defines the public design, governance, and interaction constraints for Shanta Yantra. There is no production implementation yet.
+
+Current contents:
+
+- public positioning and boundaries
+- architecture and interaction model
+- roadmap for a standalone v1.0 core
 
 ## Reading Order
 
