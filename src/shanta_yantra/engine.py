@@ -10,6 +10,18 @@ def _join_bits(bits: list[str], fallback: str) -> str:
     return ", ".join(bits)
 
 
+def _question_text(observation: ObservationResult) -> str:
+    if "decision_question" in observation.signals and "tradeoff" in observation.signals:
+        return "What matters more here: the possible value, or the cost and constraint around it?"
+    if "decision_question" in observation.signals:
+        return "What makes this a live question rather than a decision you already trust?"
+    if "hedge" in observation.signals:
+        return "What keeps this at 'maybe' instead of a clearer yes or no?"
+    if "resistance" in observation.signals:
+        return "What changes for you once this becomes a commitment?"
+    return "What are you trying to force here?"
+
+
 def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
     observation = observe_text(text)
 
@@ -37,6 +49,20 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
             rationale="Input is too brief or underdetermined for a useful mirror.",
             signals=observation.signals,
             confidence=observation.confidence,
+        )
+        return observation, response
+
+    if "decision_question" in observation.signals and "tradeoff" in observation.signals:
+        tension = _join_bits(observation.likely_tensions, "possible value colliding with practical cost")
+        response = ResponseEnvelope(
+            type="mirror",
+            text=(
+                f"This reads like {tension}. Separate what feels worthwhile from what feels costly "
+                "or constrained, then decide from the clearer split rather than from blur."
+            ),
+            rationale="Decision-question plus tradeoff language gives enough signal for a direct mirror.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.6),
         )
         return observation, response
 
@@ -69,11 +95,15 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         )
         return observation, response
 
-    if "contradiction" in observation.signals and observation.confidence < 0.7:
+    if (
+        "contradiction" in observation.signals
+        or "decision_question" in observation.signals
+        or "hedge" in observation.signals
+    ) and observation.confidence < 0.8:
         question_target = _join_bits(observation.likely_tensions, "two competing directions")
         response = ResponseEnvelope(
             type="question",
-            text=f"You appear to be holding {question_target} at once. What are you trying to force here?",
+            text=f"You appear to be holding {question_target} at once. {_question_text(observation)}",
             rationale="A single clarifying question is more useful than a stronger interpretation.",
             signals=observation.signals,
             confidence=observation.confidence,

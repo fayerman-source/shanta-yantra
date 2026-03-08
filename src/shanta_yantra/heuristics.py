@@ -29,8 +29,10 @@ RESISTANCE_MARKERS = (
     "resist",
     "afraid",
     "hesitant",
+    "hesitat",
     "procrast",
     "delay",
+    "commit",
 )
 RUMINATION_MARKERS = (
     "over and over",
@@ -58,6 +60,36 @@ SELF_JUDGMENT_MARKERS = (
     "what is wrong with me",
     "hate myself",
 )
+HEDGE_MARKERS = (
+    "probably",
+    "maybe",
+    "perhaps",
+    "might",
+    "could",
+    "i think",
+    "not sure",
+    "unsure",
+)
+DECISION_QUESTION_MARKERS = (
+    "would it make sense",
+    "does it make sense",
+    "should i",
+    "is it worth",
+    "do i want to",
+)
+TRADEOFF_MARKERS = (
+    "expensive",
+    "cost",
+    "costly",
+    "obligation",
+    "obligations",
+    "schedule",
+    "time",
+    "daytime",
+    "day-time",
+    "constraint",
+    "constraints",
+)
 SAFETY_MARKERS = (
     "kill myself",
     "end my life",
@@ -84,6 +116,9 @@ def observe_text(text: str) -> ObservationResult:
     rumination = _contains_any(normalized, RUMINATION_MARKERS)
     urgency = _contains_any(normalized, URGENCY_MARKERS)
     self_judgment = _contains_any(normalized, SELF_JUDGMENT_MARKERS)
+    hedges = _contains_any(normalized, HEDGE_MARKERS)
+    decision_questions = _contains_any(normalized, DECISION_QUESTION_MARKERS)
+    tradeoffs = _contains_any(normalized, TRADEOFF_MARKERS)
     safety = _contains_any(normalized, SAFETY_MARKERS)
 
     signals: list[str] = []
@@ -99,6 +134,12 @@ def observe_text(text: str) -> ObservationResult:
         signals.append("urgency")
     if self_judgment:
         signals.append("self_judgment")
+    if hedges:
+        signals.append("hedge")
+    if decision_questions:
+        signals.append("decision_question")
+    if tradeoffs:
+        signals.append("tradeoff")
 
     likely_tensions: list[str] = []
     if contradictions:
@@ -107,18 +148,26 @@ def observe_text(text: str) -> ObservationResult:
         likely_tensions.append("pressure colliding with reluctance")
     if urgency and rumination:
         likely_tensions.append("pressure overtaking observation")
+    if hedges:
+        likely_tensions.append("tentative commitment")
+    if decision_questions and tradeoffs:
+        likely_tensions.append("possible value colliding with practical cost")
 
     likely_conditioning: list[str] = []
     if conditioning:
         likely_conditioning.append("rule-bound or pressure-based language")
     if self_judgment:
         likely_conditioning.append("self-judging interpretation")
+    if tradeoffs:
+        likely_conditioning.append("constraint-based framing")
 
     likely_resistance: list[str] = []
     if resistance:
         likely_resistance.append("avoidance or hesitation")
     if rumination:
         likely_resistance.append("repetitive mental looping")
+    if hedges:
+        likely_resistance.append("indecision or soft holding back")
 
     raw_score = (
         len(contradictions)
@@ -127,6 +176,9 @@ def observe_text(text: str) -> ObservationResult:
         + len(rumination)
         + len(urgency)
         + len(self_judgment)
+        + len(hedges)
+        + len(decision_questions)
+        + len(tradeoffs)
     )
     confidence = min(1.0, raw_score / 6.0)
 

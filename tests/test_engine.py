@@ -33,3 +33,20 @@ def test_safety_redirect_for_crisis_language():
     _, response = build_response("I want to kill myself tonight.")
     assert response.type == "safety_redirect"
     assert "crisis" in response.text.lower() or "emergency" in response.text.lower()
+
+
+def test_question_for_soft_indecision():
+    observation, response = build_response(
+        "It's probably a good idea to register and attend the LegalWeek NYC."
+    )
+    assert response.type == "question"
+    assert "hedge" in observation.signals
+
+
+def test_mirror_for_decision_tradeoff_language():
+    observation, response = build_response(
+        "Would it make sense to network at LegalWeek NYC? It's pretty expensive, and I have day-time obligations."
+    )
+    assert response.type == "mirror"
+    assert "decision_question" in observation.signals
+    assert "tradeoff" in observation.signals
