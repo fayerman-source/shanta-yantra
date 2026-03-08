@@ -125,6 +125,7 @@ The current implementation is deliberately narrow:
 3. `docs/ARCHITECTURE.md`
 4. `docs/INTERACTION_MODEL.md`
 5. `docs/ROADMAP.md`
+6. `docs/THESIS.md`
 
 ## License
 
