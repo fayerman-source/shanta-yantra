@@ -80,13 +80,43 @@ shanta-yantra/
 
 ## Current Status
 
-This repository is documentation-first. It defines the public design, governance, and interaction constraints for Shanta Yantra. There is no production implementation yet.
+This repository now includes the first runnable implementation skeleton for a text-only v1.0 CLI.
 
 Current contents:
 
 - public positioning and boundaries
 - architecture and interaction model
 - roadmap for a standalone v1.0 core
+- deterministic Python CLI for bounded reflective output
+- local JSON session logging and test coverage
+
+## Install
+
+```bash
+uv sync --extra dev
+```
+
+## Quickstart
+
+```bash
+uv run shanta reflect --text "I should do this, but I keep avoiding it."
+```
+
+Example JSON output:
+
+```bash
+uv run shanta reflect --text "I am overwhelmed and spinning over this again and again." --json
+```
+
+## v1.0 Limits
+
+The current implementation is deliberately narrow:
+
+- text input only
+- one-shot CLI interactions
+- deterministic rules-first engine
+- no live voice, no model dependency, no database
+- bounded outputs plus explicit stopping behavior
 
 ## Reading Order
 
