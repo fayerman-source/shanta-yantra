@@ -109,6 +109,12 @@ uv sync --extra dev
 uv run shanta reflect --text "I should do this, but I keep avoiding it."
 ```
 
+Transcript-file input:
+
+```bash
+uv run shanta reflect --transcript notes/session.txt
+```
+
 Example JSON output:
 
 ```bash
@@ -119,7 +125,7 @@ uv run shanta reflect --text "I am overwhelmed and spinning over this again and 
 
 The current implementation is deliberately narrow:
 
-- text input only
+- text or transcript-file input
 - one-shot CLI interactions
 - deterministic rules-first engine
 - no live voice, no model dependency, no database

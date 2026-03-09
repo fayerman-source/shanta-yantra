@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 from typing import Sequence
 
 from shanta_yantra.engine import build_response
@@ -16,14 +17,20 @@ def build_parser() -> argparse.ArgumentParser:
 
     reflect = subparsers.add_parser("reflect", help="Run a bounded reflective pass on one text input.")
     reflect.add_argument("--text", help="Input text to reflect on.")
+    reflect.add_argument("--transcript", help="Path to a text transcript file to reflect on.")
     reflect.add_argument("--json", action="store_true", dest="json_output", help="Emit JSON output.")
     reflect.add_argument("--no-log", action="store_true", help="Do not write a local session file.")
+    reflect.add_argument("--session-dir", help="Optional directory for session log files.")
     return parser
 
 
-def _read_input(text_arg: str | None) -> str:
+def _read_input(text_arg: str | None, transcript_arg: str | None) -> str:
+    if text_arg and transcript_arg:
+        raise ValueError("Use either --text or --transcript, not both.")
     if text_arg:
         return text_arg.strip()
+    if transcript_arg:
+        return Path(transcript_arg).read_text(encoding="utf-8").strip()
     if not sys.stdin.isatty():
         try:
             return sys.stdin.read().strip()
@@ -42,7 +49,14 @@ def _print_human(record: SessionRecord) -> None:
 
 
 def run_reflect(args: argparse.Namespace) -> int:
-    text = _read_input(args.text)
+    try:
+        text = _read_input(args.text, args.transcript)
+    except FileNotFoundError as exc:
+        print(f"Transcript file not found: {exc.filename}", file=sys.stderr)
+        return 2
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
     if not text:
         print("No input provided. Use --text or pipe text to stdin.", file=sys.stderr)
         return 2
@@ -56,7 +70,7 @@ def run_reflect(args: argparse.Namespace) -> int:
     )
 
     if not args.no_log:
-        write_session(record)
+        write_session(record, directory=Path(args.session_dir) if args.session_dir else None)
 
     if args.json_output:
         print(json.dumps(record.to_dict(), indent=2))

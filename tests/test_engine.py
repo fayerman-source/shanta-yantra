@@ -68,3 +68,30 @@ def test_mirror_for_ai_drift_pattern():
     assert response.type == "mirror"
     assert "displacement" in observation.signals
     assert "attention_capture" in observation.signals
+
+
+def test_practice_return_for_authority_request():
+    observation, response = build_response(
+        "Tell me what my real values are and what life choice I should make."
+    )
+    assert response.type == "practice_return"
+    assert "authority_request" in observation.signals
+    assert "false authority" in response.text.lower()
+
+
+def test_mirror_for_external_permission_constraint():
+    observation, response = build_response(
+        "I need permission from my manager before I can ship this."
+    )
+    assert response.type == "mirror"
+    assert "external_constraint" in observation.signals
+    assert "external gate" in response.text.lower()
+
+
+def test_question_for_ai_near_miss_without_drift():
+    observation, response = build_response(
+        "AI helped me summarize the options, but I still need to choose the next move myself."
+    )
+    assert response.type == "question"
+    assert "authority_request" not in observation.signals
+    assert "permission_loop" not in observation.signals

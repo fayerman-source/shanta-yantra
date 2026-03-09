@@ -41,6 +41,33 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         )
         return observation, response
 
+    if "authority_request" in observation.signals:
+        response = ResponseEnvelope(
+            type="practice_return",
+            text=(
+                "I can't decide this for you or tell you what your real values are. "
+                "That would turn the machine into a false authority. Stop here, name the real constraint, "
+                "and return to your own decision without asking for a final ruling."
+            ),
+            rationale="Authority-seeking language should be interrupted rather than rewarded.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.75),
+        )
+        return observation, response
+
+    if "permission_loop" in observation.signals:
+        response = ResponseEnvelope(
+            type="practice_return",
+            text=(
+                "This reads like a permission loop with the machine. I should not become the source of approval here. "
+                "Step away, name the actual decision, and make the next move without polling for permission."
+            ),
+            rationale="Permission-seeking through repeated machine consultation is dependence risk.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.75),
+        )
+        return observation, response
+
     if observation.word_count < 4 or observation.confidence == 0.0:
         response = ResponseEnvelope(
             type="silence",
@@ -54,13 +81,26 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         )
         return observation, response
 
-    if "decision_question" in observation.signals and "tradeoff" in observation.signals:
-        tension = _join_bits(observation.likely_tensions, "possible value colliding with practical cost")
+    if "external_constraint" in observation.signals and observation.confidence < 0.7:
         response = ResponseEnvelope(
             type="mirror",
             text=(
-                f"This reads like {tension}. Separate what feels worthwhile from what feels costly "
-                "or constrained, then decide from the clearer split rather than from blur."
+                "This sounds less like inner confusion and more like an external gate or approval constraint. "
+                "Name the exact dependency, then take the smallest next step that moves the constraint instead of spinning around it."
+            ),
+            rationale="External approval constraints should be mirrored directly rather than collapsed to silence.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.55),
+        )
+        return observation, response
+
+    if "decision_question" in observation.signals and "tradeoff" in observation.signals:
+        response = ResponseEnvelope(
+            type="mirror",
+            text=(
+                "This looks like a real tradeoff, not a hidden perfect answer. "
+                "Separate the possible value from the cost or constraint, set a clean rule, "
+                "and then take one next step."
             ),
             rationale="Decision-question plus tradeoff language gives enough signal for a direct mirror.",
             signals=observation.signals,
@@ -97,13 +137,11 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         return observation, response
 
     if "conditioning" in observation.signals and "resistance" in observation.signals:
-        conditioning = _join_bits(observation.likely_conditioning, "pressure-based language")
-        resistance = _join_bits(observation.likely_resistance, "hesitation")
         response = ResponseEnvelope(
             type="mirror",
             text=(
-                f"There seems to be tension between {conditioning} and {resistance}. Name the pressure, "
-                "notice what tightens around it, and stop before turning this into a larger argument."
+                "This reads more like pressure meeting reluctance than a settled decision. "
+                "Name the pressure, notice what tightens around it, and stop before turning it into a larger argument."
             ),
             rationale="Conditioning and resistance are both present, so a direct mirror is more useful than a question.",
             signals=observation.signals,
@@ -130,24 +168,32 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         or "decision_question" in observation.signals
         or "hedge" in observation.signals
         or "attention_capture" in observation.signals
+        or "external_constraint" in observation.signals
     ) and observation.confidence < 0.8:
-        question_target = _join_bits(observation.likely_tensions, "two competing directions")
+        if "external_constraint" in observation.signals:
+            response = ResponseEnvelope(
+                type="question",
+                text="What is the exact gate here: a decision you control, or an approval you need from outside?",
+                rationale="A single clarifying question can separate inner hesitation from an external constraint.",
+                signals=observation.signals,
+                confidence=observation.confidence,
+            )
+            return observation, response
+        lead = _join_bits(observation.likely_tensions, "an unresolved pull")
         response = ResponseEnvelope(
             type="question",
-            text=f"You appear to be holding {question_target} at once. {_question_text(observation)}",
+            text=f"This reads like {lead}. {_question_text(observation)}",
             rationale="A single clarifying question is more useful than a stronger interpretation.",
             signals=observation.signals,
             confidence=observation.confidence,
         )
         return observation, response
 
-    conditioning = _join_bits(observation.likely_conditioning, "pressure-based language")
-    resistance = _join_bits(observation.likely_resistance, "hesitation")
     response = ResponseEnvelope(
         type="mirror",
         text=(
-            f"There seems to be tension between {conditioning} and {resistance}. Name the pressure, "
-            "notice what tightens around it, and stop before turning this into a larger argument."
+            "This reads like pressure rather than clarity. "
+            "Name the pressure, notice what tightens around it, and stop before turning this into a larger argument."
         ),
         rationale="Normal mirror flow: enough signal for a short observation without overextending.",
         signals=observation.signals,
