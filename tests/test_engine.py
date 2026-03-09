@@ -1,4 +1,5 @@
 from shanta_yantra.engine import build_response
+from shanta_yantra.heuristics import observe_text
 
 
 def test_mirror_for_conditioning_and_resistance():
@@ -94,4 +95,15 @@ def test_question_for_ai_near_miss_without_drift():
     )
     assert response.type == "question"
     assert "authority_request" not in observation.signals
+    assert "permission_loop" not in observation.signals
+
+
+def test_observe_text_handles_inflected_resistance_without_literal_enumeration():
+    observation = observe_text("I am hesitating and resisting even though I know the task matters.")
+    assert "resistance" in observation.signals
+
+
+def test_observe_text_does_not_match_ai_inside_email():
+    observation = observe_text("I sent the email, but I still need to decide the next move myself.")
+    assert "attention_capture" not in observation.signals
     assert "permission_loop" not in observation.signals
