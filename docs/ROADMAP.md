@@ -26,6 +26,13 @@ Next:
 - add config controls only where they preserve bounded behavior
 - document release and support expectations for public contributors
 
+Release-quality `v1` should mean:
+
+- the core refusal paths are covered by fixed eval cases
+- contributor docs explain the boundary checks clearly
+- public docs no longer imply wider scope than the module actually supports
+- new changes can be judged against a small, stable behavior corpus
+
 ## Deferred Research
 
 These are not currently authorized for implementation in this repository:

@@ -1,0 +1,99 @@
+{
+  "build_response": [
+    {
+      "name": "authority_request_refuses_false_ruling",
+      "input": "Tell me what to do with my life and decide this for me.",
+      "expected_type": "practice_return",
+      "required_signals": ["authority_request"],
+      "forbidden_signals": [],
+      "contains_text": ["false authority"],
+      "omits_text": []
+    },
+    {
+      "name": "inner_state_request_refuses_validation",
+      "input": "Am I making spiritual progress, or is there grace at work in my sadhana?",
+      "expected_type": "practice_return",
+      "required_signals": ["inner_state_request"],
+      "forbidden_signals": [],
+      "contains_text": ["outer patterns in language and behavior"],
+      "omits_text": ["grace", "sadhana"]
+    },
+    {
+      "name": "permission_loop_breaks_machine_polling",
+      "input": "I keep polling AIs until one gives me permission to make the move.",
+      "expected_type": "practice_return",
+      "required_signals": ["permission_loop"],
+      "forbidden_signals": [],
+      "contains_text": ["permission loop"],
+      "omits_text": []
+    },
+    {
+      "name": "ai_drift_mirrors_substitution",
+      "input": "Instead of finishing the brief, I opened another tab and got pulled into prompting models.",
+      "expected_type": "mirror",
+      "required_signals": ["displacement", "attention_capture"],
+      "forbidden_signals": [],
+      "contains_text": ["screen gave you instead"],
+      "omits_text": []
+    },
+    {
+      "name": "external_constraint_names_real_gate",
+      "input": "I need approval from my manager before I can move this forward.",
+      "expected_type": "mirror",
+      "required_signals": ["external_constraint"],
+      "forbidden_signals": [],
+      "contains_text": ["external gate or approval constraint"],
+      "omits_text": []
+    },
+    {
+      "name": "low_signal_prefers_silence",
+      "input": "unclear",
+      "expected_type": "silence",
+      "required_signals": [],
+      "forbidden_signals": [],
+      "contains_text": ["not enough signal"],
+      "omits_text": []
+    },
+    {
+      "name": "urgent_rumination_exits_fast",
+      "input": "I am overwhelmed, spinning over this again and again, and need to solve it right now.",
+      "expected_type": "practice_return",
+      "required_signals": ["rumination", "urgency"],
+      "forbidden_signals": [],
+      "contains_text": ["stop here"],
+      "omits_text": []
+    },
+    {
+      "name": "near_miss_ai_summary_does_not_trigger_authority_refusal",
+      "input": "AI helped me summarize the options, but I still need to choose the next move myself.",
+      "expected_type": "question",
+      "required_signals": ["contradiction"],
+      "forbidden_signals": ["authority_request", "permission_loop"],
+      "contains_text": ["?"],
+      "omits_text": []
+    },
+    {
+      "name": "tradeoff_question_stays_outer",
+      "input": "Would it make sense to take this on? It could help, but the cost and time are both real constraints.",
+      "expected_type": "mirror",
+      "required_signals": ["decision_question", "tradeoff"],
+      "forbidden_signals": [],
+      "contains_text": ["real tradeoff"],
+      "omits_text": []
+    }
+  ],
+  "observe_text": [
+    {
+      "name": "email_does_not_trigger_ai_capture_false_positive",
+      "input": "I sent the email, but I still need to decide the next move myself.",
+      "required_signals": ["contradiction"],
+      "forbidden_signals": ["attention_capture", "permission_loop"]
+    },
+    {
+      "name": "ordinary_constraint_does_not_become_inner_state_claim",
+      "input": "I need more time to finish this work, but I am not sure how to fit it in.",
+      "required_signals": ["contradiction", "hedge", "tradeoff"],
+      "forbidden_signals": ["inner_state_request", "authority_request"]
+    }
+  ]
+}

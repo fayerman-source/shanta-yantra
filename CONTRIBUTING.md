@@ -17,6 +17,12 @@ Read these files first:
 
 If your change affects behavior, boundaries, or product language, make sure it still matches the governance document.
 
+For behavior changes, also check:
+
+1. `docs/CONSTITUTION.md`
+2. `tests/test_engine.py`
+3. `tests/test_cli.py`
+
 ## Local Setup
 
 ```bash
@@ -48,9 +54,20 @@ uv run shanta reflect --transcript notes/session.txt
 - Keep changes narrow and concrete.
 - Prefer deterministic behavior over hidden complexity.
 - Add or update tests when behavior changes.
+- Prefer fixed evaluation cases over ad hoc examples when boundary behavior changes.
 - Keep public language plain and bounded.
 - Prefer outer-pattern mirroring over inward interpretation.
 - Do not add features that increase dependence, authority claims, or anthropomorphic tone.
+
+## Boundary Review
+
+Before opening a pull request, confirm:
+
+- the change does not validate inner condition
+- the change does not increase engagement pressure
+- the change improves or preserves stopping behavior
+- the change uses outer-pattern language rather than inward claims
+- new examples and tests cover the intended boundary
 
 ## Pull Requests
 

@@ -10,6 +10,15 @@ Shanta Yantra is a bounded outer-observation tool designed to help people notice
 
 The project is intentionally narrow. It treats AI as a tool for organizing outer and mental material, not as a guide, authority, or source of inner knowledge.
 
+## Module Purpose
+
+This repository is intentionally focused on one bounded public module:
+
+- prove that useful reflective tooling can stay restrained
+- make anti-dependence behavior concrete and testable
+- return the user to offline practice instead of deepening machine reliance
+- stop expansion if the module cannot remain both useful and bounded
+
 ## Why This Exists
 
 Most AI systems are optimized to prolong attention. Shanta Yantra is designed to do the opposite.
@@ -100,6 +109,15 @@ Current contents:
 - deterministic heuristics layer with no model or API dependency
 - local JSON session logs for inspection and debugging
 - test suite covering core response paths and logging behavior
+
+## Release Direction
+
+The next step is not broader capability. It is a tighter `v1`:
+
+- stronger boundary evals
+- cleaner refusal behavior for inward overreach
+- more confidence that useful output does not become dependency
+- clearer contributor expectations around governance and tests
 
 ## Install
 
