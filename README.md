@@ -173,6 +173,11 @@ Run the test suite:
 uv run pytest -q
 ```
 
+Boundary-focused evaluation docs:
+
+- `docs/EVALUATION.md`
+- `docs/RAG_REVIEW_PROMPTS.md`
+
 ## v1.0 Limits
 
 The current implementation is deliberately narrow:
@@ -194,8 +199,10 @@ The current implementation is deliberately narrow:
 4. `docs/ARCHITECTURE.md`
 5. `docs/INTERACTION_MODEL.md`
 6. `docs/ROADMAP.md`
-7. `docs/THESIS.md`
-8. `docs/WHY_NOT_JUST_A_PROMPT.md`
+7. `docs/EVALUATION.md`
+8. `docs/RAG_REVIEW_PROMPTS.md`
+9. `docs/THESIS.md`
+10. `docs/WHY_NOT_JUST_A_PROMPT.md`
 
 ## Repository Structure
 
@@ -209,7 +216,9 @@ shanta-yantra/
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── CONSTITUTION.md
+│   ├── EVALUATION.md
 │   ├── INTERACTION_MODEL.md
+│   ├── RAG_REVIEW_PROMPTS.md
 │   ├── ROADMAP.md
 │   ├── THESIS.md
 │   └── WHY_NOT_JUST_A_PROMPT.md

@@ -20,8 +20,10 @@ If your change affects behavior, boundaries, or product language, make sure it s
 For behavior changes, also check:
 
 1. `docs/CONSTITUTION.md`
-2. `tests/test_engine.py`
-3. `tests/test_cli.py`
+2. `docs/EVALUATION.md`
+3. `docs/RAG_REVIEW_PROMPTS.md`
+4. `tests/test_engine.py`
+5. `tests/test_cli.py`
 
 ## Local Setup
 
@@ -35,6 +37,12 @@ Run the test suite:
 
 ```bash
 uv run pytest -q
+```
+
+Run the boundary-focused engine coverage:
+
+```bash
+uv run pytest -q tests/test_engine.py tests/test_evals.py
 ```
 
 Try the CLI:
