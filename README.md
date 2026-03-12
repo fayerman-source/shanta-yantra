@@ -1,5 +1,7 @@
 # Shanta Yantra
 
+[![Tests](https://github.com/fayerman-source/shanta-yantra/actions/workflows/tests.yml/badge.svg)](https://github.com/fayerman-source/shanta-yantra/actions/workflows/tests.yml)
+
 Reduce noise. Return to practice.
 
 Shanta Yantra is a contemplative support system designed to help people observe patterns in thought, speech, behavior, and bodily state without replacing direct practice.
@@ -70,32 +72,28 @@ Every feature should make the system:
 - more willing to stop
 - easier to leave behind when direct practice is available
 
-## Repository Structure
-
-```text
-shanta-yantra/
-├── README.md
-├── GOVERNANCE.md
-├── AGENTS.md
-├── LICENSE
-└── docs/
-    ├── ARCHITECTURE.md
-    ├── INTERACTION_MODEL.md
-    └── ROADMAP.md
-```
-
 ## Current Status
 
-This repository now includes the first runnable implementation skeleton for a text-only v1.0 CLI.
+This repository includes a runnable text-first v1.0 prototype with a deterministic Python CLI and test coverage.
 
 Current contents:
 
 - public positioning and boundaries
 - architecture and interaction model
-- roadmap for a standalone v1.0 core
+- roadmap for the next implementation steps
 - deterministic Python CLI for bounded reflective output
-- local JSON session logging and test coverage
+- local JSON session logging
+- tests for CLI behavior, response shaping, and session persistence
 - early heuristics for decision-making, tradeoffs, and attention/substitution patterns
+
+## What Exists Today
+
+- one-shot CLI command: `shanta reflect`
+- input via `--text`, `--transcript`, or stdin
+- bounded response types: `mirror`, `question`, `practice_return`, `silence`, `safety_redirect`
+- deterministic heuristics layer with no model or API dependency
+- local JSON session logs for inspection and debugging
+- test suite covering core response paths and logging behavior
 
 ## Install
 
@@ -107,6 +105,16 @@ uv sync --extra dev
 
 ```bash
 uv run shanta reflect --text "I should do this, but I keep avoiding it."
+```
+
+Example terminal output:
+
+```text
+type: mirror
+This reads more like pressure meeting reluctance than a settled decision. Name the pressure, notice what tightens around it, and stop before turning it into a larger argument.
+
+rationale: Conditioning and resistance are both present, so a direct mirror is more useful than a question.
+signals: contradiction, conditioning, resistance
 ```
 
 Transcript-file input:
@@ -121,6 +129,26 @@ Example JSON output:
 uv run shanta reflect --text "I am overwhelmed and spinning over this again and again." --json
 ```
 
+Representative JSON shape:
+
+```json
+{
+  "response": {
+    "type": "mirror",
+    "text": "This looks like a real tradeoff, not a hidden perfect answer. Separate the possible value from the cost or constraint, set a clean rule, and then take one next step."
+  },
+  "observation": {
+    "signals": ["contradiction", "hedge", "decision_question", "tradeoff"]
+  }
+}
+```
+
+Run the test suite:
+
+```bash
+uv run pytest -q
+```
+
 ## v1.0 Limits
 
 The current implementation is deliberately narrow:
@@ -130,6 +158,7 @@ The current implementation is deliberately narrow:
 - deterministic rules-first engine
 - no live voice, no model dependency, no database
 - bounded outputs plus explicit stopping behavior
+- local-only session logging
 
 ## Reading Order
 
@@ -140,6 +169,45 @@ The current implementation is deliberately narrow:
 5. `docs/ROADMAP.md`
 6. `docs/THESIS.md`
 7. `docs/WHY_NOT_JUST_A_PROMPT.md`
+
+## Repository Structure
+
+```text
+shanta-yantra/
+├── README.md
+├── GOVERNANCE.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── LICENSE
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── INTERACTION_MODEL.md
+│   ├── ROADMAP.md
+│   ├── THESIS.md
+│   └── WHY_NOT_JUST_A_PROMPT.md
+├── src/shanta_yantra/
+│   ├── cli.py
+│   ├── engine.py
+│   ├── heuristics.py
+│   ├── models.py
+│   └── session_store.py
+└── tests/
+    ├── test_cli.py
+    ├── test_engine.py
+    └── test_session_store.py
+```
+
+## Contributing
+
+See `CONTRIBUTING.md` for local development steps and contribution boundaries.
+
+## Changelog
+
+See `CHANGELOG.md` for release-oriented project history.
+
+## Security
+
+See `SECURITY.md` for vulnerability reporting guidance.
 
 ## License
 

@@ -1,22 +1,25 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a docs-first public skeleton for Shanta Yantra. The root contains the core project documents, and `docs/` holds the stable design references.
+This repository contains both the public design documents and the first runnable Python implementation for Shanta Yantra. The root contains the core project documents, `docs/` holds stable design references, `src/` contains the package code, and `tests/` covers the current CLI and engine behavior.
 
 - `README.md`: public overview and positioning.
 - `GOVERNANCE.md`: decision framework and feature boundaries.
 - `docs/ARCHITECTURE.md`: three-phase architecture overview.
 - `docs/INTERACTION_MODEL.md`: response model and session rules.
 - `docs/ROADMAP.md`: implementation sequence.
-
-If code is added later, place runtime code under `src/` and tests under `tests/` or the language-standard equivalent.
+- `src/shanta_yantra/`: CLI, engine, heuristics, models, and session logging.
+- `tests/`: behavior checks for the CLI, engine, and session storage.
 
 ## Build, Test, and Development Commands
-There is no application build yet. Current work is document curation and design refinement.
+Current work includes both document refinement and a local Python CLI.
 
 - `git status`: inspect pending changes.
 - `rg "term" .`: find terminology across docs.
 - `git log --oneline`: review commit style.
+- `uv sync --extra dev`: install the project and test dependencies.
+- `uv run pytest -q`: run the test suite.
+- `uv run shanta reflect --text "..."`: run the CLI locally.
 - `markdownlint **/*.md`: optional Markdown validation if installed.
 
 ## Writing Style & Naming Conventions
@@ -36,6 +39,7 @@ Before committing:
 - grep for banned internal terms or private paths
 - confirm terminology stays aligned with governance constraints
 - confirm new docs do not overclaim what the system can do
+- run `uv run pytest -q` if behavior changes
 
 ## Commit & Pull Request Guidelines
 Use concise, imperative commit messages, for example:

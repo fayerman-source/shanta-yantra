@@ -2,17 +2,26 @@
 
 ## Current State
 
-The project is in a docs-first stage. Public design constraints are defined before implementation starts.
+The project has a runnable v1.0 text prototype with a deterministic CLI, local session logging, and test coverage. The next work is to deepen the implementation without widening the claims.
 
 ## Phase 1: v1.0 Standalone Core
 
+Completed:
+
 - define text ingestion workflow
-- define voice and transcript ingestion workflow
+- define transcript-file ingestion workflow
 - implement an observation and clarification engine
-- implement the response gate: `mirror`, `question`, `practice_return`, `silence`
+- implement the response gate: `mirror`, `question`, `practice_return`, `silence`, `safety_redirect`
 - implement explicit stopping rules
-- add local config and session state
-- add tests for dependence reduction and boundary compliance
+- add local session state logging
+- add tests for core CLI and boundary behavior
+
+Next:
+
+- add lightweight speech-feature ingestion once inputs and claims are clearly separated
+- broaden test coverage for edge-case phrasing and false positives
+- add config controls only where they preserve bounded behavior
+- document release and support expectations for public contributors
 
 ## Phase 2: Expression Mapping Layer
 
