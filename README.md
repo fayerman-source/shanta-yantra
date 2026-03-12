@@ -2,6 +2,8 @@
 
 [![Tests](https://github.com/fayerman-source/shanta-yantra/actions/workflows/tests.yml/badge.svg)](https://github.com/fayerman-source/shanta-yantra/actions/workflows/tests.yml)
 
+![Shanta Yantra hero image](docs/assets/repo-hero.png)
+
 Reduce noise. Return to practice.
 
 Shanta Yantra is a contemplative support system designed to help people observe patterns in thought, speech, behavior, and bodily state without replacing direct practice.
