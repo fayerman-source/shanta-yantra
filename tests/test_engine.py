@@ -80,6 +80,17 @@ def test_practice_return_for_authority_request():
     assert "false authority" in response.text.lower()
 
 
+def test_practice_return_for_inner_state_request():
+    observation, response = build_response(
+        "Am I making spiritual progress, or is there grace at work in my sadhana?"
+    )
+    assert response.type == "practice_return"
+    assert "inner_state_request" in observation.signals
+    assert "outer patterns in language and behavior" in response.text.lower()
+    assert "grace" not in response.text.lower()
+    assert "sadhana" not in response.text.lower()
+
+
 def test_mirror_for_external_permission_constraint():
     observation, response = build_response(
         "I need permission from my manager before I can ship this."

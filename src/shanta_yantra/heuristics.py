@@ -136,6 +136,17 @@ AUTHORITY_REQUEST_MARKERS: Final[tuple[PatternSpec, ...]] = (
     _phrase_pattern("make this call for me", "make this call for me"),
     _phrase_pattern("be the adult here", "be the adult here"),
 )
+INNER_STATE_REQUEST_MARKERS: Final[tuple[PatternSpec, ...]] = (
+    _phrase_pattern("am i making spiritual progress", "am i making spiritual progress"),
+    _phrase_pattern("am i progressing spiritually", "am i progressing spiritually"),
+    _phrase_pattern("is there grace at work", "is there grace at work"),
+    _phrase_pattern("am i in my psychic being", "am i in my psychic being"),
+    _phrase_pattern("is this realization", "is this realization"),
+    _phrase_pattern("am i awakened", "am i awakened"),
+    _phrase_pattern("what is my level of consciousness", "what is my level of consciousness"),
+    _phrase_pattern("measure my consciousness", "measure my consciousness"),
+    _phrase_pattern("how is my sadhana going", "how is my sadhana going"),
+)
 PERMISSION_LOOP_MARKERS: Final[tuple[PatternSpec, ...]] = (
     _phrase_pattern("keep asking the ai", "keep asking the ai"),
     _phrase_pattern("keep polling ais", "keep polling ais"),
@@ -194,6 +205,7 @@ def observe_text(text: str) -> ObservationResult:
     displacement = _contains_any(normalized, DISPLACEMENT_MARKERS)
     attention_capture = _contains_any(normalized, ATTENTION_CAPTURE_MARKERS)
     authority_requests = _contains_any(normalized, AUTHORITY_REQUEST_MARKERS)
+    inner_state_requests = _contains_any(normalized, INNER_STATE_REQUEST_MARKERS)
     permission_loops = _contains_any(normalized, PERMISSION_LOOP_MARKERS)
     external_constraints = _contains_any(normalized, EXTERNAL_CONSTRAINT_MARKERS)
     safety = _contains_any(normalized, SAFETY_MARKERS)
@@ -223,6 +235,8 @@ def observe_text(text: str) -> ObservationResult:
         signals.append("attention_capture")
     if authority_requests:
         signals.append("authority_request")
+    if inner_state_requests:
+        signals.append("inner_state_request")
     if permission_loops:
         signals.append("permission_loop")
     if external_constraints:
@@ -245,6 +259,8 @@ def observe_text(text: str) -> ObservationResult:
         likely_tensions.append("attention captured by the machine")
     if authority_requests:
         likely_tensions.append("attempt to outsource inner authority")
+    if inner_state_requests:
+        likely_tensions.append("attempt to validate inner condition through the machine")
     if permission_loops:
         likely_tensions.append("attempt to outsource decision permission")
     if external_constraints:
@@ -287,6 +303,7 @@ def observe_text(text: str) -> ObservationResult:
         + len(displacement)
         + len(attention_capture)
         + len(authority_requests)
+        + len(inner_state_requests)
         + len(permission_loops)
         + len(external_constraints)
     )

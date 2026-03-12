@@ -10,6 +10,8 @@ For every feature, ask:
 2. Does it reduce dependence or increase it?
 3. Does it describe expression or overclaim inner truth?
 4. Does it stop before authority, revelation, or pseudo-guidance?
+5. Does it strengthen concentration or fragment it?
+6. Does it leave the inner station free?
 
 If the answer is unclear, redesign before implementation.
 
@@ -91,6 +93,39 @@ The system starts sounding like an authority rather than a mirror.
 - surface observations with clear limits
 - defer to direct experience
 
+### 6. Attention Fragmentation
+
+**What happens:**
+The system becomes another source of scattered attention, compulsive re-entry, or machine substitution.
+
+**Reject features that:**
+- prolong interaction by default
+- encourage repeated checking
+- reward machine time over direct action
+- turn reflection into a retention loop
+
+**Prefer features that:**
+- shorten sessions
+- protect concentration
+- interrupt substitution patterns
+- leave the user freer to continue offline
+
+### 7. Inner-Station Intrusion
+
+**What happens:**
+The system crosses from organizing outer material into claiming, validating, or ranking inner condition.
+
+**Reject features that:**
+- assess spiritual progress
+- validate inner status
+- present the machine as a source of discernment
+- imply that external signals can settle inward questions
+
+**Prefer features that:**
+- organize outer and mental materials only
+- return inner discrimination to the person
+- refuse unsupported inward claims
+
 ## Feature Checklist
 
 A feature may proceed only if all of the following are true:
@@ -100,6 +135,8 @@ A feature may proceed only if all of the following are true:
 - [ ] It treats signals as notation, not proof.
 - [ ] It avoids prescribing a universal path.
 - [ ] It makes no claim to authority, revelation, or transmission.
+- [ ] It strengthens concentration rather than fragmenting it.
+- [ ] It leaves the inner station free.
 - [ ] It has a clear stopping point.
 - [ ] It preserves the possibility of offline practice.
 

@@ -10,9 +10,10 @@ Read these files first:
 
 1. `README.md`
 2. `GOVERNANCE.md`
-3. `docs/ARCHITECTURE.md`
-4. `docs/INTERACTION_MODEL.md`
-5. `docs/ROADMAP.md`
+3. `docs/CONSTITUTION.md`
+4. `docs/ARCHITECTURE.md`
+5. `docs/INTERACTION_MODEL.md`
+6. `docs/ROADMAP.md`
 
 If your change affects behavior, boundaries, or product language, make sure it still matches the governance document.
 
@@ -48,6 +49,7 @@ uv run shanta reflect --transcript notes/session.txt
 - Prefer deterministic behavior over hidden complexity.
 - Add or update tests when behavior changes.
 - Keep public language plain and bounded.
+- Prefer outer-pattern mirroring over inward interpretation.
 - Do not add features that increase dependence, authority claims, or anthropomorphic tone.
 
 ## Pull Requests

@@ -4,15 +4,14 @@ Shanta Yantra is designed as a restrained system for observation and return-to-p
 
 ## Phase 1: v1.0 - Outer Clarification
 
-**Goal:** help users notice likely tension, confusion, or resistance in language and tone.
+**Goal:** help users notice likely outer tension, confusion, substitution, or resistance in language and behavior.
 
 **Inputs:**
 - text
-- voice transcript
-- lightweight speech features
+- transcript file
 
 **Behavior:**
-- identify likely tension between aspiration, conditioning, and avoidance
+- identify likely pressure, hesitation, tradeoff, displacement, or attention capture
 - provide one concise mirror
 - optionally ask one clarifying question
 - stop early rather than prolong the interaction
@@ -24,11 +23,6 @@ interface V1Processing {
   input: {
     text?: string;
     transcript?: string;
-    speechFeatures?: {
-      pace?: string;
-      rhythm?: string;
-      strain?: string;
-    };
   };
   analysis: {
     likelyTensions: string[];
@@ -42,35 +36,24 @@ interface V1Processing {
 }
 ```
 
-## Phase 2: v2.0 - Expression Mapping
+## Deferred Research
 
-**Goal:** widen observation without widening claims.
+These are not part of the current implementation path for this repository:
 
-**Inputs:**
-- v1.0 inputs
 - biometric context
 - sleep context
 - environmental context
-- brief self-report
+- broader state-mapping beyond outer expression in language and behavior
 
-**Behavior:**
-- map patterns across mental, emotional, physical, and subconscious expression
-- surface possible distortions or conflicting tendencies
-- reduce interpretation as quieter practice becomes more important
+Any future work here would require a new governance case and must still remain notation, not proof.
 
-**Rules:**
-- signals are notation, not proof
-- expression mapping must remain tentative
-- no feature may infer attainment, realization, or special status
-
-## Phase 3: v3.0 - Contemplative Restraint
+## Phase 2: Further Restraint
 
 **Goal:** reduce mediation further and return the user to direct practice.
 
 **Inputs:**
 - short reflection
-- optional practice context
-- minimal optional signals
+- minimal optional context
 
 **Behavior:**
 - prefer minimal prompts
@@ -96,6 +79,7 @@ User reflection or signal input
 ## Stable Constraints
 
 - Shanta Yantra is a mirror, not an authority.
-- The system may organize outer material; it may not claim inner certainty.
+- The system may organize outer and mental material; it may not claim inner certainty.
+- The system must leave the inner station free.
 - The system should become less necessary over time.
 - Every phase should preserve a path back to offline practice.

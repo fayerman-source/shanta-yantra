@@ -16,35 +16,27 @@ The interaction model defines how Shanta Yantra should behave in a single sessio
 4. **No anthropomorphic bonding**
    No pseudo-friend tone, reward loops, or prompts designed to pull the user back.
 
+5. **Leave the inner station free**
+   The system may clarify outer material. It must not validate inner condition or claim spiritual discernment.
+
 ## Primary Interaction Types
 
 ### Thought Capture
 **Input:**
 - short text
-- optional voice transcript
+- optional transcript file
 
 **Output:**
-- a restrained mirror of likely tension, conditioning, or avoidance
+- a restrained mirror of likely tension, conditioning, avoidance, tradeoff, or substitution
 - at most one follow-up question
 - optional suggestion to pause rather than continue
 
-### Voice Reflection
-**Input:**
-- spoken reflection
-- optional transcript plus lightweight acoustic features
+### Deferred Inputs
+The current repo does not implement:
 
-**Output:**
-- cautious notes about rhythm, agitation, flatness, sincerity, or conflict in expression
-- no claim to detect realization, attainment, or hidden status
-
-### State Check-In
-**Input:**
-- brief self-report
-- optional biometric and sleep context
-
-**Output:**
-- an expression map across mental, emotional, physical, and subconscious notation
-- one of: `mirror`, `question`, `practice_return`, or `silence`
+- live voice analysis
+- biometric or sleep interpretation
+- broader state check-ins beyond text-first outer observation
 
 ## Response Shapes
 
@@ -52,11 +44,11 @@ Shanta Yantra should only emit one of these response types:
 
 1. `mirror`
    - 2-5 sentences
-   - identifies likely tension or distortion
+   - identifies likely outer tension, distortion, tradeoff, or substitution
 
 2. `question`
    - exactly one question
-   - used only when it sharpens observation
+   - used only when it sharpens observation of an outer pattern or practical gate
 
 3. `practice_return`
    - redirects away from the machine
@@ -77,7 +69,7 @@ Hard constraints for v1.0:
 ## Minimal Data Model
 
 - `capture`: raw text, transcript, timestamp
-- `context`: optional biometrics, sleep, environment, self-report
+- `context`: optional transcript-file metadata
 - `mirror`: output type plus concise rationale
 - `session`: start time, end time, turn count, return-to-practice flag
 
@@ -101,4 +93,5 @@ Shanta Yantra must not claim to:
 - measure consciousness itself
 - determine attainment or realization
 - transmit force, revelation, or hidden authority
+- validate inner condition
 - replace direct practice

@@ -4,6 +4,8 @@
 
 The project has a runnable v1.0 text prototype with a deterministic CLI, local session logging, and test coverage. The next work is to deepen the implementation without widening the claims.
 
+Shanta Yantra is the bounded proving module for this line of work. If it cannot preserve restraint, anti-dependence behavior, and stopping discipline, the scope should not expand.
+
 ## Phase 1: v1.0 Standalone Core
 
 Completed:
@@ -18,21 +20,24 @@ Completed:
 
 Next:
 
-- add lightweight speech-feature ingestion once inputs and claims are clearly separated
 - broaden test coverage for edge-case phrasing and false positives
+- add fixture-style evaluation cases for authority requests, dependence loops, and inward overreach
+- tighten output wording around outer-pattern mirroring and explicit refusal of inner-state validation
 - add config controls only where they preserve bounded behavior
 - document release and support expectations for public contributors
 
-## Phase 2: Expression Mapping Layer
+## Deferred Research
 
-- add biometric context ingestion
-- add sleep context ingestion
-- add environmental context ingestion
-- implement expression mapping across multiple inputs
-- keep output cautious and non-authoritative
-- expand tests for notation-vs-proof boundaries
+These are not currently authorized for implementation in this repository:
 
-## Phase 3: Contemplative Restraint Layer
+- biometric context ingestion
+- sleep context ingestion
+- environmental-state inference
+- broader inner-state mapping
+
+Any future revisit would require a separate governance case and much stronger justification than feature curiosity.
+
+## Phase 2: Further Restraint
 
 - minimize interpretation further
 - prefer silence where useful

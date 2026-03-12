@@ -6,9 +6,9 @@
 
 Reduce noise. Return to practice.
 
-Shanta Yantra is a contemplative support system designed to help people observe patterns in thought, speech, behavior, and bodily state without replacing direct practice.
+Shanta Yantra is a bounded outer-observation tool designed to help people notice patterns in thought, speech, behavior, and attention without replacing direct practice.
 
-The project is intentionally narrow. It treats AI as a tool for outer observation and clarification, not as a guide, authority, or source of insight by itself.
+The project is intentionally narrow. It treats AI as a tool for organizing outer and mental material, not as a guide, authority, or source of inner knowledge.
 
 ## Why This Exists
 
@@ -40,7 +40,7 @@ It is also being shaped as an attention-protection tool: something that can noti
    Shanta Yantra may highlight patterns in expression, but it must not claim privileged access to a person's inner state.
 
 2. **Notation, not proof**
-   Text, voice, biometric, sleep, and environmental signals are forms of notation. They may help describe expression, but they are not proof of realization, progress, or truth.
+   Any signal the system uses is notation only. It may help describe outer expression, but it is not proof of realization, progress, or truth.
 
 3. **Short sessions, clear stopping points**
    The system should prefer one useful mirror and a return to practice over extended dialogue.
@@ -54,16 +54,19 @@ It is also being shaped as an attention-protection tool: something that can noti
 6. **Protect concentration**
    A valid feature should help users notice drift, interruption, and substitution before those patterns harden into dependence.
 
+7. **Leave the inner station free**
+   The system may organize outer and mental materials only. Inner discrimination remains with the person.
+
 ## Architecture Summary
 
-Shanta Yantra is organized into three phases:
+Shanta Yantra is organized around one bounded public module:
 
 - **v1.0: Outer Clarification**
-  Text and voice input. Short mirrors that help separate likely tension, confusion, or resistance.
-- **v2.0: Expression Mapping**
-  Adds biometric, sleep, and environmental context to improve self-observation while keeping claims modest.
-- **v3.0: Contemplative Restraint**
-  Minimal prompting, deliberate silence, and stronger return-to-practice behavior.
+  Text-first capture, short mirrors, one clarifying question at most, and explicit stopping behavior.
+- **Later Work: Further Restraint**
+  Any future expansion must become quieter, not more interpretive.
+- **Deferred Research**
+  Biometric, sleep, and environmental inputs are not part of the current implementation path for this repository.
 
 ## Design Standard
 
@@ -81,6 +84,7 @@ This repository includes a runnable text-first v1.0 prototype with a determinist
 Current contents:
 
 - public positioning and boundaries
+- public constitution for feature decisions
 - architecture and interaction model
 - roadmap for the next implementation steps
 - deterministic Python CLI for bounded reflective output
@@ -161,16 +165,19 @@ The current implementation is deliberately narrow:
 - no live voice, no model dependency, no database
 - bounded outputs plus explicit stopping behavior
 - local-only session logging
+- no inner-state assessment
+- no biometric, sleep, or environmental inference
 
 ## Reading Order
 
 1. `README.md`
 2. `GOVERNANCE.md`
-3. `docs/ARCHITECTURE.md`
-4. `docs/INTERACTION_MODEL.md`
-5. `docs/ROADMAP.md`
-6. `docs/THESIS.md`
-7. `docs/WHY_NOT_JUST_A_PROMPT.md`
+3. `docs/CONSTITUTION.md`
+4. `docs/ARCHITECTURE.md`
+5. `docs/INTERACTION_MODEL.md`
+6. `docs/ROADMAP.md`
+7. `docs/THESIS.md`
+8. `docs/WHY_NOT_JUST_A_PROMPT.md`
 
 ## Repository Structure
 
@@ -183,6 +190,7 @@ shanta-yantra/
 ├── LICENSE
 ├── docs/
 │   ├── ARCHITECTURE.md
+│   ├── CONSTITUTION.md
 │   ├── INTERACTION_MODEL.md
 │   ├── ROADMAP.md
 │   ├── THESIS.md

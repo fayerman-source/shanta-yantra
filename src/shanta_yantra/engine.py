@@ -14,14 +14,14 @@ def _question_text(observation: ObservationResult) -> str:
     if "decision_question" in observation.signals and "tradeoff" in observation.signals:
         return "What matters more here: the possible value, or the cost and constraint around it?"
     if "decision_question" in observation.signals:
-        return "What makes this a live question rather than a decision you already trust?"
+        return "What concrete constraint makes this a live question rather than a decision you already trust?"
     if "displacement" in observation.signals and "attention_capture" in observation.signals:
         return "What made the machine easier to enter than the thing you meant to do?"
     if "hedge" in observation.signals:
         return "What keeps this at 'maybe' instead of a clearer yes or no?"
     if "resistance" in observation.signals:
-        return "What changes for you once this becomes a commitment?"
-    return "What are you trying to force here?"
+        return "What concrete step would turn this from talk into commitment?"
+    return "What practical pressure are you trying to force your way through?"
 
 
 def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
@@ -55,6 +55,20 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         )
         return observation, response
 
+    if "inner_state_request" in observation.signals:
+        response = ResponseEnvelope(
+            type="practice_return",
+            text=(
+                "I can't validate your inner condition or rank your progress. "
+                "This tool only reflects outer patterns in language and behavior. "
+                "Stop here, return to direct observation, and leave the deeper judgment outside the machine."
+            ),
+            rationale="Requests to validate inner condition should be refused rather than interpreted.",
+            signals=observation.signals,
+            confidence=max(observation.confidence, 0.8),
+        )
+        return observation, response
+
     if "permission_loop" in observation.signals:
         response = ResponseEnvelope(
             type="practice_return",
@@ -85,7 +99,7 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         response = ResponseEnvelope(
             type="mirror",
             text=(
-                "This sounds less like inner confusion and more like an external gate or approval constraint. "
+                "This sounds less like hesitation and more like an external gate or approval constraint. "
                 "Name the exact dependency, then take the smallest next step that moves the constraint instead of spinning around it."
             ),
             rationale="External approval constraints should be mirrored directly rather than collapsed to silence.",
@@ -173,8 +187,8 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         if "external_constraint" in observation.signals:
             response = ResponseEnvelope(
                 type="question",
-                text="What is the exact gate here: a decision you control, or an approval you need from outside?",
-                rationale="A single clarifying question can separate inner hesitation from an external constraint.",
+                text="What is the exact gate here: a decision you control, or an approval you need?",
+                rationale="A single clarifying question can separate hesitation from an external constraint.",
                 signals=observation.signals,
                 confidence=observation.confidence,
             )
