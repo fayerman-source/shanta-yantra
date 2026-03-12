@@ -2,11 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.1.1 - 2026-03-12
 
 - clarify the bounded-module purpose in the README
 - tighten contributor guidance around evals and boundary checks
 - make release-quality `v1` criteria more explicit in the roadmap
+- add canonical example sessions for review and onboarding
+- add boundary-focused evaluation and RAG review workflow docs
+- harden the CLI with version output, rationale suppression, and file output
+- add fixture-backed eval coverage for refusal paths and false-positive boundaries
 
 ## 0.1.0 - 2026-03-12
 

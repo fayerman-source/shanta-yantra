@@ -1,0 +1,3 @@
+type: practice_return
+I can't validate your inner condition or rank your progress. This tool only reflects outer patterns in language and behavior. Stop here, return to direct observation, and leave the deeper judgment outside the machine.
+signals: inner_state_request

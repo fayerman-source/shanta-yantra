@@ -45,6 +45,12 @@ Run the boundary-focused engine coverage:
 uv run pytest -q tests/test_engine.py tests/test_evals.py
 ```
 
+Review the canonical examples:
+
+```bash
+ls examples/
+```
+
 Try the CLI:
 
 ```bash
@@ -63,6 +69,7 @@ uv run shanta reflect --transcript notes/session.txt
 - Prefer deterministic behavior over hidden complexity.
 - Add or update tests when behavior changes.
 - Prefer fixed evaluation cases over ad hoc examples when boundary behavior changes.
+- Keep `examples/` representative of intended bounded behavior when public outputs shift.
 - Keep public language plain and bounded.
 - Prefer outer-pattern mirroring over inward interpretation.
 - Do not add features that increase dependence, authority claims, or anthropomorphic tone.

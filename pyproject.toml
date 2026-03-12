@@ -1,10 +1,16 @@
 [project]
 name = "shanta-yantra"
-version = "0.1.0"
+version = "0.1.1"
 description = "Reduce noise. Return to practice."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+keywords = ["cli", "reflection", "attention", "heuristics", "safety"]
+
+[project.urls]
+Repository = "https://github.com/fayerman-source/shanta-yantra"
+Issues = "https://github.com/fayerman-source/shanta-yantra/issues"
+Changelog = "https://github.com/fayerman-source/shanta-yantra/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [

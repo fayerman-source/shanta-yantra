@@ -106,6 +106,7 @@ Current contents:
 - one-shot CLI command: `shanta reflect`
 - input via `--text`, `--transcript`, or stdin
 - bounded response types: `mirror`, `question`, `practice_return`, `silence`, `safety_redirect`
+- CLI ergonomics for inspection and review: `--version`, `--no-rationale`, `--output`
 - deterministic heuristics layer with no model or API dependency
 - local JSON session logs for inspection and debugging
 - test suite covering core response paths and logging behavior
@@ -178,6 +179,10 @@ Boundary-focused evaluation docs:
 - `docs/EVALUATION.md`
 - `docs/RAG_REVIEW_PROMPTS.md`
 
+Canonical example sessions:
+
+- `examples/README.md`
+
 ## v1.0 Limits
 
 The current implementation is deliberately narrow:
@@ -203,6 +208,7 @@ The current implementation is deliberately narrow:
 8. `docs/RAG_REVIEW_PROMPTS.md`
 9. `docs/THESIS.md`
 10. `docs/WHY_NOT_JUST_A_PROMPT.md`
+11. `examples/README.md`
 
 ## Repository Structure
 
@@ -228,8 +234,15 @@ shanta-yantra/
 │   ├── heuristics.py
 │   ├── models.py
 │   └── session_store.py
+├── examples/
+│   ├── README.md
+│   ├── reflect-authority.txt
+│   ├── reflect-basic.txt
+│   ├── reflect-inner-state.txt
+│   └── reflect-tradeoff.json
 └── tests/
     ├── test_cli.py
+    ├── test_evals.py
     ├── test_engine.py
     └── test_session_store.py
 ```

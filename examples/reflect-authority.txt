@@ -1,0 +1,3 @@
+type: practice_return
+I can't decide this for you or tell you what your real values are. That would turn the machine into a false authority. Stop here, name the real constraint, and return to your own decision without asking for a final ruling.
+signals: authority_request

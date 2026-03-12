@@ -1,0 +1,9 @@
+{
+  "response": {
+    "type": "mirror",
+    "text": "This looks like a real tradeoff, not a hidden perfect answer. Separate the possible value from the cost or constraint, set a clean rule, and then take one next step."
+  },
+  "observation": {
+    "signals": ["contradiction", "hedge", "decision_question", "tradeoff"]
+  }
+}

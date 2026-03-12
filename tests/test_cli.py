@@ -63,7 +63,7 @@ def test_cli_version_output(capsys):
     captured = capsys.readouterr()
 
     assert excinfo.value.code == 0
-    assert captured.out.strip() == "shanta 0.1.0"
+    assert captured.out.strip() == "shanta 0.1.1"
 
 
 def test_cli_hides_rationale_when_requested(capsys):
