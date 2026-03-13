@@ -33,6 +33,12 @@ Release-quality `v1` should mean:
 - public docs no longer imply wider scope than the module actually supports
 - new changes can be judged against a small, stable behavior corpus
 
+Possible next implementation branch after this release-quality baseline:
+
+- an optional wrapper MVP around existing AI CLIs
+- must remain non-coercive, thresholded, and silent by default
+- see `docs/WRAPPER_MVP.md`
+
 ## Deferred Research
 
 These are not currently authorized for implementation in this repository:
