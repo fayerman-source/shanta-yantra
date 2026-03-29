@@ -76,6 +76,8 @@ User reflection or signal input
                       return
 ```
 
+Optional adapters may sit in front of the same bounded core. The current implementation includes a Gemini-first pre-send wrapper that observes outer prompt/session patterns, stays silent during normal use, and prints one bounded interruption only when a threshold is crossed.
+
 ## Stable Constraints
 
 - Shanta Yantra is a mirror, not an authority.
@@ -83,3 +85,4 @@ User reflection or signal input
 - The system must leave the inner station free.
 - The system should become less necessary over time.
 - Every phase should preserve a path back to offline practice.
+- Wrapper integrations may interrupt, but must not enforce.

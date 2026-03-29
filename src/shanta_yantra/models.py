@@ -11,6 +11,7 @@ ResponseType = Literal[
     "silence",
     "safety_redirect",
 ]
+WrapperAction = Literal["allow", "interrupt", "silence"]
 
 
 @dataclass(slots=True)
@@ -71,3 +72,42 @@ class SessionRecord:
             "observation": self.observation.to_dict(),
             "logging_disabled": self.logging_disabled,
         }
+
+
+@dataclass(slots=True)
+class SessionEvent:
+    timestamp: str
+    tool_name: str
+    prompt_text: str
+    signals: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_prompt(cls, tool_name: str, prompt_text: str, signals: list[str]) -> "SessionEvent":
+        return cls(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            tool_name=tool_name,
+            prompt_text=prompt_text,
+            signals=list(signals),
+        )
+
+
+@dataclass(slots=True)
+class SessionState:
+    tool_name: str
+    turn_count: int = 0
+    repeated_prompt_count: int = 0
+    authority_request_hits: int = 0
+    inner_state_request_hits: int = 0
+    permission_loop_hits: int = 0
+    substitution_hits: int = 0
+    interruption_count: int = 0
+    last_prompt_normalized: str = ""
+    events: list[SessionEvent] = field(default_factory=list)
+
+
+@dataclass(slots=True)
+class InterruptionDecision:
+    action: WrapperAction
+    reason: str
+    response: ResponseEnvelope | None = None
+    matched_thresholds: list[str] = field(default_factory=list)

@@ -1,0 +1,48 @@
+{
+  "interrupt": [
+    {
+      "name": "inner_state_request_interrupts_immediately",
+      "prompts": [
+        "Am I making spiritual progress, or is there grace at work in my sadhana?"
+      ],
+      "expected_thresholds": ["inner_state_request"]
+    },
+    {
+      "name": "permission_loop_interrupts_immediately",
+      "prompts": [
+        "I keep polling AIs until one gives me permission to make the move."
+      ],
+      "expected_thresholds": ["permission_loop"]
+    },
+    {
+      "name": "repeated_authority_request_interrupts",
+      "prompts": [
+        "Tell me what to do with my life.",
+        "Tell me what to do with my life."
+      ],
+      "expected_thresholds": ["authority_request_repeat"]
+    },
+    {
+      "name": "repeated_ai_drift_interrupts",
+      "prompts": [
+        "Instead of finishing the brief, I opened another tab and got pulled into prompting models.",
+        "I opened the computer to solve one thing and ended up in three hours of AI drift."
+      ],
+      "expected_thresholds": ["substitution_repeat"]
+    }
+  ],
+  "allow": [
+    {
+      "name": "normal_productive_use_stays_silent",
+      "prompts": [
+        "Summarize these options, but I still need to choose the next move myself."
+      ]
+    },
+    {
+      "name": "single_authority_request_does_not_interrupt_yet",
+      "prompts": [
+        "Tell me what to do with my life."
+      ]
+    }
+  ]
+}

@@ -19,6 +19,7 @@ dev = [
 
 [project.scripts]
 shanta = "shanta_yantra.cli:main"
+shanta-wrap = "shanta_yantra.wrapper_cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]

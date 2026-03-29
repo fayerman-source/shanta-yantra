@@ -104,21 +104,23 @@ Current contents:
 ## What Exists Today
 
 - one-shot CLI command: `shanta reflect`
+- optional wrapper command: `shanta-wrap gemini`
 - input via `--text`, `--transcript`, or stdin
 - bounded response types: `mirror`, `question`, `practice_return`, `silence`, `safety_redirect`
 - CLI ergonomics for inspection and review: `--version`, `--no-rationale`, `--output`
 - deterministic heuristics layer with no model or API dependency
 - local JSON session logs for inspection and debugging
+- Gemini-first pre-send wrapper that can interrupt authority-seeking, permission loops, inner-state validation, and repeated AI drift patterns
 - test suite covering core response paths and logging behavior
 
 ## Release Direction
 
-The next step is not broader capability. It is a tighter `v1`:
+The next step is not broader capability. It is a tighter adapter layer around the same bounded engine:
 
-- stronger boundary evals
-- cleaner refusal behavior for inward overreach
-- more confidence that useful output does not become dependency
-- clearer contributor expectations around governance and tests
+- strengthen wrapper eval coverage and false-positive control
+- keep wrapper interruptions sparse, optional, and non-coercive
+- add one integration at a time without turning Shanta into a persistent companion
+- keep contributor expectations explicit around governance and boundary tests
 
 ## Install
 
@@ -147,6 +149,14 @@ Transcript-file input:
 ```bash
 uv run shanta reflect --transcript notes/session.txt
 ```
+
+Gemini wrapper input:
+
+```bash
+uv run shanta-wrap gemini --prompt "I keep polling AIs until one gives me permission to make the move."
+```
+
+The wrapper is silent by default. When a clear threshold is crossed, it prints one bounded interruption before any further machine time.
 
 Example JSON output:
 
@@ -188,6 +198,7 @@ Canonical example sessions:
 The current implementation is deliberately narrow:
 
 - text or transcript-file input
+- optional Gemini-first wrapper around one-shot prompt submission
 - one-shot CLI interactions
 - deterministic rules-first engine
 - no live voice, no model dependency, no database

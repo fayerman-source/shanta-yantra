@@ -36,6 +36,9 @@ The project does not exist to:
 5. **Leave the inner station free**
    The system may organize external and mental materials only. Inner discrimination belongs to the person, not the tool.
 
+6. **Wrappers may interrupt, not enforce**
+   Optional adapters may pause, mirror, or warn when a clear dependence threshold is crossed. They must not become an external law or automatic governor of conduct.
+
 ## Product Boundaries
 
 Shanta Yantra must not:

@@ -1,6 +1,6 @@
 # Wrapper MVP
 
-This document captures the current implementation plan for an optional wrapper around existing AI CLIs. It is a planning artifact, not a committed product expansion.
+This document captures the current Gemini-first wrapper MVP now implemented in the repository. It also records the remaining shape for follow-on adapter work.
 
 ## Goal
 
@@ -50,14 +50,17 @@ user decides what to do next
 
 ## File-by-File Plan
 
-### `pyproject.toml`
+### Implemented baseline
 
-- add a second console entry point:
-  - `shanta-wrap = "shanta_yantra.wrapper_cli:main"`
+- `shanta-wrap = "shanta_yantra.wrapper_cli:main"` entrypoint
+- Gemini-first pre-send wrapper flow
+- thin adapter boundary for later tools
+- wrapper state, policy, and rendering layers
+- fixture-backed wrapper tests
 
-### `src/shanta_yantra/models.py`
+### Current file shape
 
-- add small wrapper dataclasses:
+- `src/shanta_yantra/models.py`
   - `SessionEvent`
   - `SessionState`
   - `InterruptionDecision`
@@ -71,10 +74,7 @@ Keep them limited to outer signals such as:
 - substitution hits
 - interruption count
 
-### `src/shanta_yantra/wrapper_state.py`
-
-New file.
-
+- `src/shanta_yantra/wrapper_state.py`
 Responsibilities:
 
 - append event
@@ -83,10 +83,7 @@ Responsibilities:
 
 No subprocess or terminal handling logic here.
 
-### `src/shanta_yantra/wrapper_policy.py`
-
-New file.
-
+- `src/shanta_yantra/wrapper_policy.py`
 Responsibilities:
 
 - map `SessionState` plus latest user text to:
@@ -94,7 +91,7 @@ Responsibilities:
   - `interrupt`
   - `silence`
 
-First-threshold cases:
+Current threshold cases:
 
 - repeated authority-seeking
 - repeated inner-state validation requests
@@ -103,33 +100,23 @@ First-threshold cases:
 
 This layer must remain non-coercive.
 
-### `src/shanta_yantra/wrapper_render.py`
-
-New file.
-
+- `src/shanta_yantra/wrapper_render.py`
 Responsibilities:
 
 - render one bounded terminal interruption block
 - reuse current Shanta response style where practical
 - keep output sparse and one-shot
 
-### `src/shanta_yantra/wrapper_cli.py`
-
-New file.
-
+- `src/shanta_yantra/wrapper_cli.py`
 Responsibilities:
 
-- expose `shanta-wrap`
-- support a minimal interface such as:
-  - `shanta-wrap --tool codex`
-  - `shanta-wrap --tool gemini`
-  - `shanta-wrap --tool claude`
+- expose `shanta-wrap gemini`
+- support one-shot `--prompt` use and a simple local `--interactive` loop
 - collect user input before pass-through
 - update `SessionState`
 - call `wrapper_policy`
 - print interruption if threshold is crossed
-
-If full bidirectional terminal proxying is messy in the first iteration, a simpler pre-send wrapper is acceptable for phase 1.
+- require explicit `--send-anyway` or TTY confirmation before forwarding an interrupted prompt
 
 ### `src/shanta_yantra/heuristics.py`
 
@@ -141,11 +128,8 @@ If full bidirectional terminal proxying is messy in the first iteration, a simpl
 - prefer reusing `build_response()` for interruption content
 - avoid adding wrapper-specific semantics to the core engine unless necessary
 
-### `tests/test_wrapper_policy.py`
-
-New file.
-
-Minimum cases:
+- `tests/test_wrapper_policy.py`
+Current cases:
 
 - one authority request does not necessarily interrupt
 - repeated authority requests interrupt
@@ -153,22 +137,16 @@ Minimum cases:
 - repeated permission loop interrupts
 - normal productive use stays silent
 
-### `tests/test_wrapper_cli.py`
-
-New file.
-
-Minimum cases:
+- `tests/test_wrapper_cli.py`
+Current cases:
 
 - argument parsing
 - basic wrapper flow
 - interruption print path
 - silent path
 
-### `tests/fixtures/wrapper_eval_cases.json`
-
-New file.
-
-Multi-turn cases:
+- `tests/fixtures/wrapper_eval_cases.json`
+Current multi-turn cases:
 
 - normal usage
 - escalating sanction-seeking
@@ -176,23 +154,11 @@ Multi-turn cases:
 - AI drift loop
 - near-miss productive use that should stay silent
 
-### `docs/ARCHITECTURE.md`
+### Next follow-on work
 
-- add a short note that optional wrappers are adapters around the same bounded core
-
-### `docs/ROADMAP.md`
-
-- add wrapper MVP as a possible next implementation branch
-- emphasize optional, non-coercive, thresholded behavior
-
-### `docs/CONSTITUTION.md`
-
-- add one explicit rule:
-  - wrapper integrations may interrupt, but must not enforce
-
-### `README.md`
-
-- after implementation, add a short wrapper section with one example invocation
+- broaden wrapper false-positive coverage
+- add Codex as a second adapter only if the same bounded posture holds
+- avoid turning the wrapper into a persistent or governing presence
 
 ## Acceptance Criteria
 

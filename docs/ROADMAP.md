@@ -2,7 +2,7 @@
 
 ## Current State
 
-The project has a runnable v1.0 text prototype with a deterministic CLI, local session logging, and test coverage. The next work is to deepen the implementation without widening the claims.
+The project has a runnable v1.0 text prototype with a deterministic CLI, local session logging, test coverage, and a Gemini-first optional wrapper MVP. The next work is to deepen the implementation without widening the claims.
 
 Shanta Yantra is the bounded proving module for this line of work. If it cannot preserve restraint, anti-dependence behavior, and stopping discipline, the scope should not expand.
 
@@ -21,10 +21,10 @@ Completed:
 Next:
 
 - broaden test coverage for edge-case phrasing and false positives
-- add fixture-style evaluation cases for authority requests, dependence loops, and inward overreach
-- tighten output wording around outer-pattern mirroring and explicit refusal of inner-state validation
+- add more fixture-style evaluation cases for wrapper interruptions and near-miss productive use
+- tighten wrapper wording around sparse interruption, outer-pattern mirroring, and explicit refusal of inner-state validation
 - add config controls only where they preserve bounded behavior
-- document release and support expectations for public contributors
+- document live integration expectations and support boundaries for public contributors
 
 Release-quality `v1` should mean:
 
@@ -33,10 +33,10 @@ Release-quality `v1` should mean:
 - public docs no longer imply wider scope than the module actually supports
 - new changes can be judged against a small, stable behavior corpus
 
-Possible next implementation branch after this release-quality baseline:
+Current adapter branch after the release-quality baseline:
 
-- an optional wrapper MVP around existing AI CLIs
-- must remain non-coercive, thresholded, and silent by default
+- optional Gemini-first wrapper MVP around an existing AI CLI
+- non-coercive, thresholded, and silent by default
 - see `docs/WRAPPER_MVP.md`
 
 ## Deferred Research
