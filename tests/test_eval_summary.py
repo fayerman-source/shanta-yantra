@@ -12,7 +12,7 @@ def test_build_eval_summary_counts_engine_and_wrapper_cases():
     assert summary["engine"]["build_response_cases"] == 9
     assert summary["engine"]["observe_text_cases"] == 2
     assert summary["wrapper"]["interrupt_cases"] == 4
-    assert summary["wrapper"]["allow_cases"] == 2
+    assert summary["wrapper"]["allow_cases"] == 6
     assert summary["wrapper"]["thresholds"]["permission_loop"] == 1
 
 
@@ -32,6 +32,7 @@ def test_cli_eval_summary_outputs_json(capsys):
     assert exit_code == 0
     assert payload["engine"]["build_response_cases"] == 9
     assert payload["wrapper"]["interrupt_cases"] == 4
+    assert payload["wrapper"]["allow_cases"] == 6
 
 
 def test_cli_eval_summary_outputs_human_text(capsys):

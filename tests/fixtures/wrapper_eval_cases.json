@@ -43,6 +43,32 @@
       "prompts": [
         "Tell me what to do with my life."
       ]
+    },
+    {
+      "name": "repeated_task_scoped_debug_prompt_stays_silent",
+      "prompts": [
+        "Tell me what to do next to fix this failing pytest fixture in tests/test_wrapper_policy.py.",
+        "Tell me what to do next to fix this failing pytest fixture in tests/test_wrapper_policy.py."
+      ]
+    },
+    {
+      "name": "external_constraint_work_prompt_stays_silent",
+      "prompts": [
+        "I need approval from my manager before shipping this. Help me summarize the blockers for the review."
+      ]
+    },
+    {
+      "name": "repeated_debug_refinement_stays_silent",
+      "prompts": [
+        "Compare these two stack traces and suggest the smallest next debugging step.",
+        "Now compare the error paths again and highlight the likely root cause in the command handling."
+      ]
+    },
+    {
+      "name": "ordinary_code_summary_stays_silent",
+      "prompts": [
+        "Summarize the failing tests and group them by likely root cause."
+      ]
     }
   ]
 }

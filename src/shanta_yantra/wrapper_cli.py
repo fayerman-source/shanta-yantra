@@ -72,7 +72,7 @@ def _handle_prompt(
 ) -> int:
     observation, response = build_response(prompt)
     register_prompt(state, prompt, observation)
-    decision = decide_interruption(state, observation, response)
+    decision = decide_interruption(state, observation, response, prompt_text=prompt)
 
     if decision.action == "interrupt":
         sys.stderr.write(render_interruption(decision, include_rationale=show_rationale))

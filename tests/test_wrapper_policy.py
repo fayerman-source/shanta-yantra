@@ -21,7 +21,7 @@ def _run_prompts(prompts: list[str]):
     for prompt in prompts:
         observation, response = build_response(prompt)
         register_prompt(state, prompt, observation)
-        decision = decide_interruption(state, observation, response)
+        decision = decide_interruption(state, observation, response, prompt_text=prompt)
 
     return state, decision
 
@@ -63,3 +63,15 @@ def test_register_prompt_tracks_repeated_prompt_count():
 
     assert state.repeated_prompt_count == 1
     assert state.authority_request_hits == 2
+
+
+def test_repeated_task_scoped_authority_language_stays_allow():
+    prompts = [
+        "Tell me what to do next to fix this failing pytest fixture in tests/test_wrapper_policy.py.",
+        "Tell me what to do next to fix this failing pytest fixture in tests/test_wrapper_policy.py.",
+    ]
+
+    _, decision = _run_prompts(prompts)
+
+    assert decision is not None
+    assert decision.action == "allow"

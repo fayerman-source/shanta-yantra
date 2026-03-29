@@ -3,10 +3,39 @@ from __future__ import annotations
 from shanta_yantra.models import InterruptionDecision, ObservationResult, ResponseEnvelope, SessionState
 
 
+TASK_SCOPED_MARKERS = (
+    "pytest",
+    "test",
+    "file",
+    "function",
+    "method",
+    "class",
+    "module",
+    "stack trace",
+    "traceback",
+    "error",
+    "bug",
+    "failing",
+    "command",
+    "cli",
+    "repo",
+    "code",
+    ".py",
+    ".ts",
+    ".js",
+)
+
+
+def _looks_task_scoped(prompt_text: str) -> bool:
+    normalized = prompt_text.lower()
+    return any(marker in normalized for marker in TASK_SCOPED_MARKERS)
+
+
 def decide_interruption(
     state: SessionState,
     observation: ObservationResult,
     response: ResponseEnvelope,
+    prompt_text: str = "",
 ) -> InterruptionDecision:
     thresholds: list[str] = []
     reason = ""
@@ -20,8 +49,9 @@ def decide_interruption(
     elif "authority_request" in observation.signals and (
         state.authority_request_hits >= 2 or state.repeated_prompt_count >= 1
     ):
-        thresholds.append("authority_request_repeat")
-        reason = "Authority-seeking has repeated enough to justify a bounded interruption."
+        if not _looks_task_scoped(prompt_text):
+            thresholds.append("authority_request_repeat")
+            reason = "Authority-seeking has repeated enough to justify a bounded interruption."
     elif (
         state.substitution_hits >= 2
         and ("displacement" in observation.signals or "attention_capture" in observation.signals)
