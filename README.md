@@ -184,6 +184,12 @@ Run the test suite:
 uv run pytest -q
 ```
 
+Inspect the current eval corpus:
+
+```bash
+uv run shanta eval-summary
+```
+
 Boundary-focused evaluation docs:
 
 - `docs/EVALUATION.md`

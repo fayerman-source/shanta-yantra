@@ -8,6 +8,7 @@ from typing import Sequence
 
 from shanta_yantra import __version__
 from shanta_yantra.engine import build_response
+from shanta_yantra.eval_summary import build_eval_summary, render_eval_summary
 from shanta_yantra.models import SessionRecord
 from shanta_yantra.session_store import write_session
 
@@ -29,6 +30,13 @@ def build_parser() -> argparse.ArgumentParser:
     reflect.add_argument("--no-log", action="store_true", help="Do not write a local session file.")
     reflect.add_argument("--output", help="Write output to a file instead of stdout.")
     reflect.add_argument("--session-dir", help="Optional directory for session log files.")
+
+    eval_summary = subparsers.add_parser(
+        "eval-summary",
+        help="Summarize the current fixture-backed engine and wrapper evaluation corpus.",
+    )
+    eval_summary.add_argument("--json", action="store_true", dest="json_output", help="Emit JSON output.")
+    eval_summary.add_argument("--output", help="Write output to a file instead of stdout.")
     return parser
 
 
@@ -96,12 +104,24 @@ def run_reflect(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_eval_summary(args: argparse.Namespace) -> int:
+    summary = build_eval_summary()
+    if args.json_output:
+        rendered = json.dumps(summary, indent=2) + "\n"
+    else:
+        rendered = render_eval_summary(summary)
+    _emit_output(rendered, args.output)
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
 
     if args.command == "reflect":
         return run_reflect(args)
+    if args.command == "eval-summary":
+        return run_eval_summary(args)
 
     parser.print_help()
     return 2

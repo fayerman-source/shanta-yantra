@@ -17,9 +17,12 @@ The most important behaviors are:
 The repository currently uses two complementary test layers:
 
 1. Hand-written behavior tests in `tests/test_engine.py`
-2. Fixture-backed regression cases in `tests/test_evals.py`
+2. Fixture-backed regression cases in `tests/test_evals.py` and `tests/test_wrapper_policy.py`
 
-The fixture corpus lives in `tests/fixtures/engine_eval_cases.json`.
+The fixture corpus lives in:
+
+- `tests/fixtures/engine_eval_cases.json`
+- `tests/fixtures/wrapper_eval_cases.json`
 
 ## How To Run
 
@@ -39,6 +42,18 @@ Run only the CLI coverage:
 
 ```bash
 uv run pytest -q tests/test_cli.py
+```
+
+Print a quick summary of the fixture corpus:
+
+```bash
+uv run shanta eval-summary
+```
+
+Emit the same summary as JSON:
+
+```bash
+uv run shanta eval-summary --json
 ```
 
 ## How To Add A Case
@@ -62,6 +77,8 @@ Prefer a hand-written unit test when:
 - inner-state validation
 - permission loops
 - AI drift and substitution
+- wrapper interruption thresholds
+- near-miss productive wrapper use
 - external constraints
 - low-signal silence
 - urgent rumination
