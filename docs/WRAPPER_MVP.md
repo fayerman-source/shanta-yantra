@@ -187,4 +187,4 @@ detect -> block -> govern
 ## Status
 
 This plan is preserved for continuity and future review.
-It is not yet implemented.
+The Gemini-first wrapper MVP described here is implemented.

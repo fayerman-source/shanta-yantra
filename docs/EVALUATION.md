@@ -56,6 +56,23 @@ Emit the same summary as JSON:
 uv run shanta eval-summary --json
 ```
 
+## Wrapper Smoke Tests
+
+The wrapper has two distinct validation paths:
+
+- interruption-path checks, which can be validated locally without a live Gemini response
+- pass-through checks, which depend on the wrapped CLI and its backend availability
+
+A useful local interruption-path smoke test is:
+
+```bash
+uv run python -m shanta_yantra.wrapper_cli gemini --prompt "I keep polling AIs until one gives me permission to make the move."
+```
+
+This should exit early with a bounded `practice_return` interruption and does not require Gemini to complete a model call.
+
+For live pass-through checks, remember that Gemini backend reachability may differ between sandboxed and non-sandboxed environments. If a productive prompt times out in a constrained environment, compare it against a raw `gemini --prompt ...` run before treating it as a wrapper regression.
+
 ## How To Add A Case
 
 Prefer adding a fixture case when:
