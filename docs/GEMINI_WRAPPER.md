@@ -20,6 +20,12 @@ uv run shanta demo gemini
 
 Use the demo first when checking an install. It shows the wrapper behavior without touching Gemini, MCP servers, network auth, or model output.
 
+For a simple local prompt loop around Gemini:
+
+```bash
+uv run shanta-wrap gemini --interactive
+```
+
 ## Responsibility Boundary
 
 Shanta is responsible for:
@@ -71,7 +77,7 @@ When an interruption appears:
 
 - press Enter or `n` to stop
 - press `y` to send the prompt to Gemini anyway
-- pass `--send-anyway` when you intentionally want non-interactive forwarding after interruption
+- use the `--send-anyway` flag at invocation to bypass confirmation and forward the prompt automatically after an interruption
 
 ## Support Boundaries
 
@@ -80,7 +86,7 @@ Supported now:
 - `shanta reflect`
 - `shanta demo gemini`
 - `shanta-wrap gemini`
-- one-shot prompt forwarding with `--prompt`
+- one-shot prompt forwarding with `--prompt` or via stdin
 - a simple local interactive wrapper loop
 
 Not supported now:
