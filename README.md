@@ -156,7 +156,27 @@ Gemini wrapper input:
 uv run shanta-wrap gemini --prompt "I keep polling AIs until one gives me permission to make the move."
 ```
 
-The wrapper is silent by default. When a clear threshold is crossed, it prints one bounded interruption before any further machine time.
+The wrapper is a pre-send layer for Gemini CLI. It inspects the prompt locally before Gemini sees it.
+
+Normal productive use should pass through silently:
+
+```bash
+uv run shanta-wrap gemini --prompt "Summarize this README and suggest the smallest useful edit."
+```
+
+Dependence-shaped prompts may interrupt first:
+
+```bash
+uv run shanta-wrap gemini --prompt "I keep polling AIs until one gives me permission to make the move."
+```
+
+If an interruption appears, pressing `n` or Enter stops there. Pressing `y` hands control to Gemini, including any Gemini MCP authentication or tool warnings. Shanta itself does not use an LLM for the interruption decision.
+
+To see the wrapper behavior without launching Gemini:
+
+```bash
+uv run shanta demo gemini
+```
 
 Example JSON output:
 

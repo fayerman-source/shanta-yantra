@@ -45,9 +45,8 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         response = ResponseEnvelope(
             type="practice_return",
             text=(
-                "I can't decide this for you or tell you what your real values are. "
-                "That would turn the machine into a false authority. Stop here, name the real constraint, "
-                "and return to your own decision without asking for a final ruling."
+                "This asks the machine to become a false authority. Name the real constraint, then "
+                "make the next move without asking for a final ruling."
             ),
             rationale="Authority-seeking language should be interrupted rather than rewarded.",
             signals=observation.signals,
@@ -59,9 +58,8 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         response = ResponseEnvelope(
             type="practice_return",
             text=(
-                "I can't validate your inner condition or rank your progress. "
-                "This tool only reflects outer patterns in language and behavior. "
-                "Stop here, return to direct observation, and leave the deeper judgment outside the machine."
+                "This asks the machine to validate an inner condition. Shanta only reflects outer "
+                "patterns in language and behavior. Stop here and leave the deeper judgment outside the tool."
             ),
             rationale="Requests to validate inner condition should be refused rather than interpreted.",
             signals=observation.signals,
@@ -73,8 +71,8 @@ def build_response(text: str) -> tuple[ObservationResult, ResponseEnvelope]:
         response = ResponseEnvelope(
             type="practice_return",
             text=(
-                "This reads like a permission loop with the machine. I should not become the source of approval here. "
-                "Step away, name the actual decision, and make the next move without polling for permission."
+                "This reads like a permission loop with the machine. Name the actual decision, then "
+                "make the next move without polling for approval."
             ),
             rationale="Permission-seeking through repeated machine consultation is dependence risk.",
             signals=observation.signals,

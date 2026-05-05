@@ -54,6 +54,7 @@ user decides what to do next
 
 - `shanta-wrap = "shanta_yantra.wrapper_cli:main"` entrypoint
 - Gemini-first pre-send wrapper flow
+- `shanta demo gemini` dry-run explanation command
 - thin adapter boundary for later tools
 - wrapper state, policy, and rendering layers
 - fixture-backed wrapper tests
@@ -156,9 +157,10 @@ Current multi-turn cases:
 
 ### Next follow-on work
 
-- broaden wrapper false-positive coverage
+- keep broadening wrapper false-positive coverage around normal work prompts
 - add Codex as a second adapter only if the same bounded posture holds
 - avoid turning the wrapper into a persistent or governing presence
+- keep the first-run Gemini path legible enough that users know when Shanta has stopped and when Gemini has taken over
 
 ## Acceptance Criteria
 
