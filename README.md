@@ -178,6 +178,8 @@ To see the wrapper behavior without launching Gemini:
 uv run shanta demo gemini
 ```
 
+For the live integration boundary, including what counts as Shanta behavior versus Gemini CLI or MCP behavior, see `docs/GEMINI_WRAPPER.md`.
+
 Example JSON output:
 
 ```bash
@@ -241,11 +243,12 @@ The current implementation is deliberately narrow:
 4. `docs/ARCHITECTURE.md`
 5. `docs/INTERACTION_MODEL.md`
 6. `docs/ROADMAP.md`
-7. `docs/EVALUATION.md`
-8. `docs/RAG_REVIEW_PROMPTS.md`
-9. `docs/THESIS.md`
-10. `docs/WHY_NOT_JUST_A_PROMPT.md`
-11. `examples/README.md`
+7. `docs/GEMINI_WRAPPER.md`
+8. `docs/EVALUATION.md`
+9. `docs/RAG_REVIEW_PROMPTS.md`
+10. `docs/THESIS.md`
+11. `docs/WHY_NOT_JUST_A_PROMPT.md`
+12. `examples/README.md`
 
 ## Repository Structure
 

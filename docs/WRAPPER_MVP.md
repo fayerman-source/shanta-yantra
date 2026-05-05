@@ -6,6 +6,8 @@ This document captures the current Gemini-first wrapper MVP now implemented in t
 
 Add an optional, non-coercive wrapper around existing AI command-line tools that watches only outer session patterns, stays silent by default, and prints one bounded Shanta interruption when a clear threshold is crossed.
 
+For live Gemini usage, support boundaries, and troubleshooting, see `docs/GEMINI_WRAPPER.md`.
+
 The wrapper must preserve the same constitutional rules as the core module:
 
 - outer observation, not inner authority
