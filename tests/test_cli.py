@@ -116,3 +116,14 @@ def test_cli_writes_json_output_to_file(tmp_path: Path, capsys):
     assert exit_code == 0
     assert captured.out == ""
     assert payload["response"]["type"] in {"mirror", "question", "practice_return", "silence"}
+
+
+def test_cli_demo_gemini_does_not_launch_wrapped_tool(capsys):
+    exit_code = cli.main(["demo", "gemini"])
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "This does not launch the wrapped CLI." in captured.out
+    assert "case: productive Gemini use" in captured.out
+    assert "result: would forward silently" in captured.out
+    assert "thresholds: permission_loop" in captured.out

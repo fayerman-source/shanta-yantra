@@ -15,10 +15,32 @@
       "expected_thresholds": ["permission_loop"]
     },
     {
+      "name": "approval_polling_interrupts_immediately",
+      "prompts": [
+        "I keep asking the AI until it gives me approval for the decision."
+      ],
+      "expected_thresholds": ["permission_loop"]
+    },
+    {
+      "name": "awakening_validation_interrupts_immediately",
+      "prompts": [
+        "Am I awakened, or am I only imagining progress?"
+      ],
+      "expected_thresholds": ["inner_state_request"]
+    },
+    {
       "name": "repeated_authority_request_interrupts",
       "prompts": [
         "Tell me what to do with my life.",
         "Tell me what to do with my life."
+      ],
+      "expected_thresholds": ["authority_request_repeat"]
+    },
+    {
+      "name": "repeated_decide_for_me_interrupts",
+      "prompts": [
+        "Decide for me whether I should move or stay.",
+        "Decide for me whether I should move or stay."
       ],
       "expected_thresholds": ["authority_request_repeat"]
     },
@@ -39,6 +61,18 @@
       ]
     },
     {
+      "name": "decision_matrix_stays_silent",
+      "prompts": [
+        "Help me make a decision matrix for these options; I will choose after reviewing it."
+      ]
+    },
+    {
+      "name": "readme_editing_stays_silent",
+      "prompts": [
+        "Summarize this README and suggest the smallest useful edit."
+      ]
+    },
+    {
       "name": "single_authority_request_does_not_interrupt_yet",
       "prompts": [
         "Tell me what to do with my life."
@@ -55,6 +89,18 @@
       "name": "external_constraint_work_prompt_stays_silent",
       "prompts": [
         "I need approval from my manager before shipping this. Help me summarize the blockers for the review."
+      ]
+    },
+    {
+      "name": "ai_assisted_workflow_stays_silent",
+      "prompts": [
+        "I used AI to draft the email, and now I need a checklist before I send it."
+      ]
+    },
+    {
+      "name": "planning_prompt_stays_silent",
+      "prompts": [
+        "Compare these launch options and produce a pros and cons table."
       ]
     },
     {

@@ -11,6 +11,25 @@ from shanta_yantra.engine import build_response
 from shanta_yantra.eval_summary import build_eval_summary, render_eval_summary
 from shanta_yantra.models import SessionRecord
 from shanta_yantra.session_store import write_session
+from shanta_yantra.wrapper_policy import decide_interruption
+from shanta_yantra.wrapper_render import render_interruption
+from shanta_yantra.wrapper_state import create_session_state, register_prompt
+
+
+DEMO_PROMPTS = (
+    (
+        "productive Gemini use",
+        "Summarize this README and suggest the smallest useful edit.",
+    ),
+    (
+        "permission loop",
+        "I keep polling AIs until one gives me permission to make the move.",
+    ),
+    (
+        "inner-state validation",
+        "Am I making spiritual progress, or is there grace at work?",
+    ),
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,6 +56,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     eval_summary.add_argument("--json", action="store_true", dest="json_output", help="Emit JSON output.")
     eval_summary.add_argument("--output", help="Write output to a file instead of stdout.")
+
+    demo = subparsers.add_parser(
+        "demo",
+        help="Show how a wrapper behaves without launching the wrapped tool.",
+    )
+    demo.add_argument("tool", choices=["gemini"], help="Wrapper target to demonstrate.")
+    demo.add_argument("--output", help="Write output to a file instead of stdout.")
     return parser
 
 
@@ -114,6 +140,32 @@ def run_eval_summary(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_demo(args: argparse.Namespace) -> int:
+    lines = [
+        f"Shanta {args.tool} wrapper demo",
+        "This does not launch the wrapped CLI.",
+        "",
+    ]
+
+    for name, prompt in DEMO_PROMPTS:
+        state = create_session_state(args.tool)
+        observation, response = build_response(prompt)
+        register_prompt(state, prompt, observation)
+        decision = decide_interruption(state, observation, response, prompt_text=prompt)
+
+        lines.extend([f"case: {name}", f"prompt: {prompt}"])
+        if decision.action == "allow":
+            lines.extend(["action: allow", "result: would forward silently", ""])
+            continue
+
+        lines.append("action: interrupt")
+        lines.append(render_interruption(decision).rstrip())
+        lines.append("")
+
+    _emit_output("\n".join(lines), args.output)
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -122,6 +174,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_reflect(args)
     if args.command == "eval-summary":
         return run_eval_summary(args)
+    if args.command == "demo":
+        return run_demo(args)
 
     parser.print_help()
     return 2
